@@ -15,14 +15,6 @@
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc; /* slate-50 */
         }
-        .active-nav-link {
-            background-color: #fef3c7; /* amber-100 */
-            color: #d97706; /* amber-500 */
-            border-right: 4px solid #d97706;
-        }
-        .nav-link:not(.active-nav-link):hover {
-            background-color: #f1f5f9; /* slate-100 */
-        }
         .active-process {
             background-color: #fef3c7; /* amber-100 */
             color: #d97706; /* amber-500 */
@@ -80,216 +72,239 @@
          .suspension-card:hover .suspension-icon {
             transform: rotate(180deg);
         }
+        .nav-link {
+            transition: all 0.2s ease-in-out;
+        }
+        .active-nav-link {
+            background-color: #fef3c7; /* amber-100 */
+            color: #d97706; /* amber-500 */
+            font-weight: 600; /* semibold */
+            border-left: 4px solid #d97706;
+        }
     </style>
 </head>
 <body class="text-slate-700">
 
-    <!-- Sidebar Navigation -->
-    <nav class="fixed left-0 top-0 h-full w-64 bg-white shadow-md z-10 hidden lg:flex flex-col">
-        <div class="p-6 text-center border-b border-slate-200">
-            <h2 class="text-xl font-bold text-amber-600">McDonald's Hub</h2>
-        </div>
-        <ul class="flex flex-col py-4 space-y-1">
-            <li><a href="#processes" class="nav-link w-full flex items-center gap-3 px-6 py-3 text-slate-600 font-semibold transition-colors duration-200"><i data-lucide="server" class="w-5 h-5"></i>Core Processes</a></li>
-            <li><a href="#daily-flow" class="nav-link w-full flex items-center gap-3 px-6 py-3 text-slate-600 font-semibold transition-colors duration-200"><i data-lucide="calendar" class="w-5 h-5"></i>Daily Flow</a></li>
-            <li><a href="#scheduling-wfm" class="nav-link w-full flex items-center gap-3 px-6 py-3 text-slate-600 font-semibold transition-colors duration-200"><i data-lucide="clipboard-pen" class="w-5 h-5"></i>Scheduling</a></li>
-            <li><a href="#tools" class="nav-link w-full flex items-center gap-3 px-6 py-3 text-slate-600 font-semibold transition-colors duration-200"><i data-lucide="wrench" class="w-5 h-5"></i>Tools & Resources</a></li>
-            <li><a href="#team" class="nav-link w-full flex items-center gap-3 px-6 py-3 text-slate-600 font-semibold transition-colors duration-200"><i data-lucide="users" class="w-5 h-5"></i>Meet the Team</a></li>
-        </ul>
-        <div class="mt-auto p-4 text-center text-xs text-slate-400 border-t border-slate-200">
-             <p>INTOUCHCX 2025. ALL RIGHTS RESERVED</p>
-        </div>
-    </nav>
-    
-    <!-- Main Content -->
-    <main class="lg:ml-64">
-        <div class="container mx-auto p-4 sm:p-6 lg:p-8">
-            <header class="text-center mb-16">
-                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">McDonald's WFM Hub</h1>
-                <p class="mt-4 text-lg text-slate-600">Your central resource for all Workforce Management processes.</p>
-            </header>
+    <div class="relative min-h-screen lg:flex">
+        <!-- Navigation Sidebar -->
+        <nav id="sidebar-nav" class="hidden lg:block sticky top-0 h-screen bg-white w-64 flex-shrink-0 border-r border-slate-200 overflow-y-auto">
+            <div class="p-4 border-b border-slate-200 text-center">
+                <h2 class="text-xl font-bold text-slate-800">McDonald's Hub</h2>
+                <p class="text-sm text-slate-500">Navigation</p>
+            </div>
+            <ul class="flex flex-col py-4">
+                <li><a href="#processes" class="nav-link flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100"><i data-lucide="layout-list" class="w-5 h-5"></i><span>Core Processes</span></a></li>
+                <li><a href="#daily-flow" class="nav-link flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100"><i data-lucide="calendar-days" class="w-5 h-5"></i><span>Daily Flow</span></a></li>
+                <li><a href="#scheduling-wfm" class="nav-link flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100"><i data-lucide="calendar-check-2" class="w-5 h-5"></i><span>Scheduling</span></a></li>
+                <li><a href="#tools" class="nav-link flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100"><i data-lucide="wrench" class="w-5 h-5"></i><span>Tools & Resources</span></a></li>
+                <li><a href="#team" class="nav-link flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100"><i data-lucide="users" class="w-5 h-5"></i><span>Meet the Team</span></a></li>
+            </ul>
+             <div class="px-4 mt-4">
+                <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Other Hubs</h3>
+            </div>
+            <ul class="flex flex-col pt-2 pb-4">
+                 <li><a href="./lifesafer-hub.html" class="nav-link flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-slate-800 text-sm"><i data-lucide="shield" class="w-4 h-4 text-sky-500"></i><span>LifeSafer Hub</span></a></li>
+                 <li><a href="./lyft-hub.html" class="nav-link flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-slate-800 text-sm"><i data-lucide="car" class="w-4 h-4 text-pink-500"></i><span>Lyft Hub</span></a></li>
+                 <li><a href="./general-mills-hub.html" class="nav-link flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-slate-800 text-sm"><i data-lucide="cookie" class="w-4 h-4 text-indigo-500"></i><span>General Mills Hub</span></a></li>
+                 <li><a href="./figma-hub.html" class="nav-link flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-slate-800 text-sm"><i data-lucide="pen-tool" class="w-4 h-4 text-fuchsia-500"></i><span>Figma Hub</span></a></li>
+                 <li><a href="./relay-hub.html" class="nav-link flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-slate-800 text-sm"><i data-lucide="server" class="w-4 h-4 text-teal-500"></i><span>Relay Hub</span></a></li>
+            </ul>
+        </nav>
 
-            <!-- Our Core Processes -->
-            <section id="processes" class="mb-20 pt-16 -mt-16">
-                <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Our Core Processes</h2>
-                <div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
-                    <div class="grid grid-cols-1 md:grid-cols-3">
-                        <div class="md:col-span-1 border-r border-slate-200">
-                            <div id="process-list" class="flex flex-col">
-                                <!-- Process items will be injected by JS -->
+        <!-- Main Content -->
+        <main class="flex-1">
+            <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+                <header class="text-center mb-16">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">McDonald's WFM Hub</h1>
+                    <p class="mt-4 text-lg text-slate-600">Your central resource for all Workforce Management processes.</p>
+                </header>
+
+                <!-- Our Core Processes -->
+                <section id="processes" class="mb-20">
+                    <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Our Core Processes</h2>
+                    <div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-3">
+                            <div class="md:col-span-1 border-r border-slate-200">
+                                <div id="process-list" class="flex flex-col">
+                                    <!-- Process items will be injected by JS -->
+                                </div>
+                            </div>
+                            <div id="process-content" class="md:col-span-2 p-8 md:p-12 min-h-[400px] flex flex-col justify-center items-center text-center">
+                                <!-- Content will be injected by JS -->
                             </div>
                         </div>
-                        <div id="process-content" class="md:col-span-2 p-8 md:p-12 min-h-[400px] flex flex-col justify-center items-center text-center">
-                            <!-- Content will be injected by JS -->
-                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- Workforce Daily Flow -->
-            <section id="daily-flow" class="mb-20 pt-16 -mt-16">
-                <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Workforce Daily Flow</h2>
-                <div id="daily-flow-container" class="grid grid-cols-1 md:grid-cols-5 bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
-                    <!-- Daily flow cards will be injected by JS -->
-                </div>
-            </section>
-            
-            <!-- Scheduling & WFM Section -->
-            <section id="scheduling-wfm" class="mb-16 pt-16 -mt-16">
-                <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Scheduling & Workforce Management</h2>
+                <!-- Workforce Daily Flow -->
+                <section id="daily-flow" class="mb-20">
+                    <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Workforce Daily Flow</h2>
+                    <div id="daily-flow-container" class="grid grid-cols-1 md:grid-cols-5 bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
+                        <!-- Daily flow cards will be injected by JS -->
+                    </div>
+                </section>
                 
-                <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-8 border border-slate-200">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                        <div>
-                            <h3 class="text-2xl font-semibold text-amber-600 mb-4">Key Responsibilities</h3>
-                            <p class="mb-6">A successful scheduling week relies on clear roles and timely actions. This chart breaks down the core duties of each team member in the scheduling process.</p>
-                            <div class="space-y-4">
-                                <div class="flex items-center"><span class="h-4 w-4 rounded-full bg-amber-800 mr-3"></span><p><span class="font-bold">Agents:</span> Adhere to schedules and report deviations.</p></div>
-                                <div class="flex items-center"><span class="h-4 w-4 rounded-full bg-amber-600 mr-3"></span><p><span class="font-bold">Team Leads:</span> Monitor teams and communicate updates.</p></div>
-                                <div class="flex items-center"><span class="h-4 w-4 rounded-full bg-amber-400 mr-3"></span><p><span class="font-bold">WFM Team:</span> Plot schedules and notify leads.</p></div>
+                <!-- Scheduling & WFM Section -->
+                <section id="scheduling-wfm" class="mb-16">
+                    <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Scheduling & Workforce Management</h2>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-8 border border-slate-200">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h3 class="text-2xl font-semibold text-amber-600 mb-4">Key Responsibilities</h3>
+                                <p class="mb-6">A successful scheduling week relies on clear roles and timely actions. This chart breaks down the core duties of each team member in the scheduling process.</p>
+                                <div class="space-y-4">
+                                    <div class="flex items-center"><span class="h-4 w-4 rounded-full bg-amber-800 mr-3"></span><p><span class="font-bold">Agents:</span> Adhere to schedules and report deviations.</p></div>
+                                    <div class="flex items-center"><span class="h-4 w-4 rounded-full bg-amber-600 mr-3"></span><p><span class="font-bold">Team Leads:</span> Monitor teams and communicate updates.</p></div>
+                                    <div class="flex items-center"><span class="h-4 w-4 rounded-full bg-amber-400 mr-3"></span><p><span class="font-bold">WFM Team:</span> Plot schedules and notify leads.</p></div>
+                                </div>
+                            </div>
+                            <div class="h-64 md:h-80"><canvas id="rolesChart"></canvas></div>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-slate-200">
+                            <h3 class="text-xl font-semibold text-center text-amber-600 mb-6">Key Weekly Deadlines & Events</h3>
+                            <div class="max-w-md mx-auto">
+                                <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-amber-800">Every 15th and 30th of the month.</h4><p>PTO Request dates will be available during these days of the month and up to 45 days from the release date will be available</p></div>
+                                <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-amber-800">Thursday, 10:00 PM MNL</h4><p>PTO Validation and Schedule Change Requests Validation</p></div>
+                                <div class="flowchart-step"><h4 class="font-semibold text-lg text-amber-800">Friday (Thursday Shift) 2:00 AM MNL</h4><p class="font-semibold">Weekly Schedules Published & Locked</p><p class="text-sm text-slate-500">No further changes will be accepted for the week.</p></div>
                             </div>
                         </div>
-                        <div class="h-64 md:h-80"><canvas id="rolesChart"></canvas></div>
                     </div>
-                    <div class="mt-8 pt-6 border-t border-slate-200">
-                        <h3 class="text-xl font-semibold text-center text-amber-600 mb-6">Key Weekly Deadlines & Events</h3>
-                        <div class="max-w-md mx-auto">
-                            <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-amber-800">Every 15th and 30th of the month.</h4><p>PTO Request dates will be available during these days of the month and up to 45 days from the release date will be available</p></div>
-                            <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-amber-800">Thursday, 10:00 PM MNL</h4><p>PTO Validation and Schedule Change Requests Validation</p></div>
-                            <div class="flowchart-step"><h4 class="font-semibold text-lg text-amber-800">Friday (Thursday Shift) 2:00 AM MNL</h4><p class="font-semibold">Weekly Schedules Published & Locked</p><p class="text-sm text-slate-500">No further changes will be accepted for the week.</p></div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-8 border border-slate-200">
+                         <h3 class="text-2xl font-semibold text-center text-amber-600 mb-6">Plotting Offline Activities</h3>
+                         <p class="text-center text-lg mb-8 max-w-3xl mx-auto">To maintain productivity and ensure accurate reporting, all non-queue activities like coaching, meetings, and training must be scheduled in Assemble.</p>
+                         <div class="max-w-3xl mx-auto">
+                             <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-amber-600">1. Weekly Verification</h4><p>Team Leads check weekly to ensure their team's activities are plotted.</p></div>
+                             <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-amber-600">2. Request Submission</h4><p>If segments are missing, the Team Lead formally requests the WFM team to plot the activity.</p></div>
+                             <div class="flowchart-step"><h4 class="font-semibold text-lg text-amber-600">3. Real-Time Exception</h4><p>For urgent activities, Team Leads must notify the Real-Time Analyst (RTA) at least <span class="font-bold text-amber-800">30 minutes</span> in advance.</p></div>
+                         </div>
+                    </div>
+
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div class="bg-white rounded-lg shadow-lg p-6 border border-slate-200">
+                            <h3 class="text-2xl font-semibold text-amber-600 mb-4">Schedule Swap & Change Requests</h3>
+                            <p class="mb-6">To ensure fairness and operational stability, all schedule modifications follow a strict set of guidelines.</p>
+                            <ul class="space-y-3 list-disc list-inside text-slate-600">
+                                <li>Requests must be sent <span class="font-bold">2 weeks</span> in advance.</li>
+                                <li>Agents involved must have the <span class="font-bold">same skill set</span>.</li>
+                                <li>Break/lunch swaps are only permitted for <span class="font-bold">medical reasons</span> with documentation.</li>
+                                <li>Email subject must be: <code class="bg-slate-200 text-sm p-1 rounded">Program SWAP/SCHEDULE Request</code>.</li>
+                                <li class="!mt-4"><span class="font-bold text-red-600">Note:</span> Schedules are locked every <span class="font-bold">Thursday at 2:00 AM MNL</span>.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-lg p-6 border border-slate-200">
+                            <h3 class="text-2xl font-semibold text-amber-600 mb-4">Paid Time Off (PTO) Requests</h3>
+                            <p class="mb-6">All PTO requests must be submitted through the official channels within the specified timelines.</p>
+                            <ul class="space-y-3 list-disc list-inside text-slate-600">
+                                <li>File via Program Leave Form at least <span class="font-bold">2 weeks</span> in advance.</li>
+                                <li>Validation deadline is <span class="font-bold">Thursday, 10:00 PM MNL</span>.</li>
+                                <li>The Leave Form must be <span class="font-bold">fully completed</span>.</li>
+                                <li>Vacation Leaves <span class="font-bold">cannot be swapped</span>.</li>
+                            </ul>
                         </div>
                     </div>
-                </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-semibold text-center text-amber-600 mb-6">Schedule Suspension Protocol</h3>
+                        <p class="text-center text-lg max-w-4xl mx-auto mb-10">Schedule suspensions are required for extended absences. The process varies significantly based on the reason for the leave.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">RTWO</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="font-semibold text-slate-500">3 Unauthorized Absences</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> NOD & Projected Attrition date. Ticket due by Thursday, 10:00 PM MNL.</p></div></div>
+                            <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Medical Leave (MLOA)</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Validated Medical Certificate</p><p><span class="font-semibold">Approver:</span> OM or OD</p><p><span class="font-semibold">Requirement:</span> Clinic-validated MedCert for min. 3 days.</p></div></div>
+                            <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Maternity Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Maternity</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> MedCert with HR approval & completed forms.</p></div></div>
+                            <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Paternity Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Married Employees Only</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> Supporting documents provided to HR.</p></div></div>
+                            <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Termination</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Attrition/Resignation</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> HR acknowledgement and SOM/OD sign-off.</p></div></div>
+                            <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Solo-Parent Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">DSWD ID Required</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> Prior HR approval and official Solo Parent ID.</p></div></div>
+                            <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer md:col-span-2 lg:col-span-1 lg:col-start-2"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Bereavement Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Immediate Family Only</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> Documents provided to HR (regular employees).</p></div></div>
+                            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-lg md:col-span-2 lg:col-span-3"><h4 class="font-bold">Critical Note on Ticket Processing</h4><p>Suspension tickets will be rejected if required approvals are missing, documents are not attached, or the submission is past the deadline.</p></div>
+                        </div>
+                    </div>
+                </section>
 
-                <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-8 border border-slate-200">
-                     <h3 class="text-2xl font-semibold text-center text-amber-600 mb-6">Plotting Offline Activities</h3>
-                     <p class="text-center text-lg mb-8 max-w-3xl mx-auto">To maintain productivity and ensure accurate reporting, all non-queue activities like coaching, meetings, and training must be scheduled in Assemble.</p>
-                     <div class="max-w-3xl mx-auto">
-                         <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-amber-600">1. Weekly Verification</h4><p>Team Leads check weekly to ensure their team's activities are plotted.</p></div>
-                         <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-amber-600">2. Request Submission</h4><p>If segments are missing, the Team Lead formally requests the WFM team to plot the activity.</p></div>
-                         <div class="flowchart-step"><h4 class="font-semibold text-lg text-amber-600">3. Real-Time Exception</h4><p>For urgent activities, Team Leads must notify the Real-Time Analyst (RTA) at least <span class="font-bold text-amber-800">30 minutes</span> in advance.</p></div>
+                <!-- Tools & Resources -->
+                <section id="tools" class="mb-20">
+                     <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Tools & Resources</h2>
+                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+                         <!-- MCD Dashboard -->
+                         <a href="https://lookerstudio.google.com/u/0/reporting/620dc5bd-6bf7-4cca-8568-327bb0c797af/page/p_w6250fc6pc" target="_blank" rel="noopener noreferrer" class="group bg-white p-6 rounded-lg shadow-lg border border-slate-200 hover:border-amber-400 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center">
+                             <i data-lucide="layout-dashboard" class="w-10 h-10 text-amber-500 mb-4 transition-transform duration-300 group-hover:scale-110"></i>
+                             <h3 class="text-xl font-bold text-amber-600">MCD Dashboard</h3>
+                         </a>
+                         <!-- WFM HC Tracker -->
+                         <a href="https://docs.google.com/spreadsheets/d/1yHZz2jIQ3yaLF2TxjXuRSPTFfxjIsj0w3NdoJAMFDJc/edit?gid=225015401#gid=225015401" target="_blank" rel="noopener noreferrer" class="group bg-white p-6 rounded-lg shadow-lg border border-slate-200 hover:border-amber-400 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center">
+                             <i data-lucide="users" class="w-10 h-10 text-amber-500 mb-4 transition-transform duration-300 group-hover:scale-110"></i>
+                             <h3 class="text-xl font-bold text-amber-600">WFM HC Tracker</h3>
+                         </a>
+                         <!-- MCD Leave Tracker -->
+                         <a href="https://docs.google.com/spreadsheets/d/1J2kz0YzD9HlteScwChQADSMeZZ_pERmOXrORxeD78fE/edit?gid=450027496#gid=450027496" target="_blank" rel="noopener noreferrer" class="group bg-white p-6 rounded-lg shadow-lg border border-slate-200 hover:border-amber-400 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center sm:col-start-auto lg:col-start-auto sm:col-span-2 lg:col-span-1">
+                             <i data-lucide="clipboard-list" class="w-10 h-10 text-amber-500 mb-4 transition-transform duration-300 group-hover:scale-110"></i>
+                             <h3 class="text-xl font-bold text-amber-600">MCD Leave Tracker</h3>
+                         </a>
                      </div>
-                </div>
+                </section>
 
-                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                    <div class="bg-white rounded-lg shadow-lg p-6 border border-slate-200">
-                        <h3 class="text-2xl font-semibold text-amber-600 mb-4">Schedule Swap & Change Requests</h3>
-                        <p class="mb-6">To ensure fairness and operational stability, all schedule modifications follow a strict set of guidelines.</p>
-                        <ul class="space-y-3 list-disc list-inside text-slate-600">
-                            <li>Requests must be sent <span class="font-bold">2 weeks</span> in advance.</li>
-                            <li>Agents involved must have the <span class="font-bold">same skill set</span>.</li>
-                            <li>Break/lunch swaps are only permitted for <span class="font-bold">medical reasons</span> with documentation.</li>
-                            <li>Email subject must be: <code class="bg-slate-200 text-sm p-1 rounded">Program SWAP/SCHEDULE Request</code>.</li>
-                            <li class="!mt-4"><span class="font-bold text-red-600">Note:</span> Schedules are locked every <span class="font-bold">Thursday at 2:00 AM MNL</span>.</li>
-                        </ul>
-                    </div>
-                    <div class="bg-white rounded-lg shadow-lg p-6 border border-slate-200">
-                        <h3 class="text-2xl font-semibold text-amber-600 mb-4">Paid Time Off (PTO) Requests</h3>
-                        <p class="mb-6">All PTO requests must be submitted through the official channels within the specified timelines.</p>
-                        <ul class="space-y-3 list-disc list-inside text-slate-600">
-                            <li>File via Program Leave Form at least <span class="font-bold">2 weeks</span> in advance.</li>
-                            <li>Validation deadline is <span class="font-bold">Thursday, 10:00 PM MNL</span>.</li>
-                            <li>The Leave Form must be <span class="font-bold">fully completed</span>.</li>
-                            <li>Vacation Leaves <span class="font-bold">cannot be swapped</span>.</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-2xl font-semibold text-center text-amber-600 mb-6">Schedule Suspension Protocol</h3>
-                    <p class="text-center text-lg max-w-4xl mx-auto mb-10">Schedule suspensions are required for extended absences. The process varies significantly based on the reason for the leave.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">RTWO</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="font-semibold text-slate-500">3 Unauthorized Absences</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> NOD & Projected Attrition date. Ticket due by Thursday, 10:00 PM MNL.</p></div></div>
-                        <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Medical Leave (MLOA)</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Validated Medical Certificate</p><p><span class="font-semibold">Approver:</span> OM or OD</p><p><span class="font-semibold">Requirement:</span> Clinic-validated MedCert for min. 3 days.</p></div></div>
-                        <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Maternity Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Maternity</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> MedCert with HR approval & completed forms.</p></div></div>
-                        <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Paternity Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Married Employees Only</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> Supporting documents provided to HR.</p></div></div>
-                        <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Termination</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Attrition/Resignation</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> HR acknowledgement and SOM/OD sign-off.</p></div></div>
-                        <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Solo-Parent Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">DSWD ID Required</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> Prior HR approval and official Solo Parent ID.</p></div></div>
-                        <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer md:col-span-2 lg:col-span-1 lg:col-start-2"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Bereavement Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Immediate Family Only</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> Documents provided to HR (regular employees).</p></div></div>
-                        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-lg md:col-span-2 lg:col-span-3"><h4 class="font-bold">Critical Note on Ticket Processing</h4><p>Suspension tickets will be rejected if required approvals are missing, documents are not attached, or the submission is past the deadline.</p></div>
-                    </div>
-                </div>
-            </section>
+                <!-- Meet the Team -->
+                <section id="team">
+                    <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Meet the WFM Team</h2>
 
-            <!-- Tools & Resources -->
-            <section id="tools" class="mb-20 pt-16 -mt-16">
-                 <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Tools & Resources</h2>
-                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
-                     <!-- MCD Dashboard -->
-                     <a href="https://lookerstudio.google.com/u/0/reporting/620dc5bd-6bf7-4cca-8568-327bb0c797af/page/p_w6250fc6pc" target="_blank" rel="noopener noreferrer" class="group bg-white p-6 rounded-lg shadow-lg border border-slate-200 hover:border-amber-400 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center">
-                         <i data-lucide="layout-dashboard" class="w-10 h-10 text-amber-500 mb-4 transition-transform duration-300 group-hover:scale-110"></i>
-                         <h3 class="text-xl font-bold text-amber-600">MCD Dashboard</h3>
-                     </a>
-                     <!-- WFM HC Tracker -->
-                     <a href="https://docs.google.com/spreadsheets/d/1yHZz2jIQ3yaLF2TxjXuRSPTFfxjIsj0w3NdoJAMFDJc/edit?gid=225015401#gid=225015401" target="_blank" rel="noopener noreferrer" class="group bg-white p-6 rounded-lg shadow-lg border border-slate-200 hover:border-amber-400 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center">
-                         <i data-lucide="users" class="w-10 h-10 text-amber-500 mb-4 transition-transform duration-300 group-hover:scale-110"></i>
-                         <h3 class="text-xl font-bold text-amber-600">WFM HC Tracker</h3>
-                     </a>
-                     <!-- MCD Leave Tracker -->
-                     <a href="https://docs.google.com/spreadsheets/d/1J2kz0YzD9HlteScwChQADSMeZZ_pERmOXrORxeD78fE/edit?gid=450027496#gid=450027496" target="_blank" rel="noopener noreferrer" class="group bg-white p-6 rounded-lg shadow-lg border border-slate-200 hover:border-amber-400 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center sm:col-start-auto lg:col-start-auto sm:col-span-2 lg:col-span-1">
-                         <i data-lucide="clipboard-list" class="w-10 h-10 text-amber-500 mb-4 transition-transform duration-300 group-hover:scale-110"></i>
-                         <h3 class="text-xl font-bold text-amber-600">MCD Leave Tracker</h3>
-                     </a>
-                 </div>
-            </section>
-
-            <!-- Meet the Team -->
-            <section id="team" class="pt-16 -mt-16">
-                <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Meet the WFM Team</h2>
-
-                <!-- Top Row -->
-                <div class="flex flex-wrap justify-center items-stretch gap-8 mb-8">
-                    <!-- Celo Cansino -->
-                    <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
-                        <img src="https://lh3.googleusercontent.com/a-/ALV-UjW4d5sSiJBCtRFog8CvBuI2SSnvWEMJfCyM9FnYs_9UCCMQ4JVk8A=s240-p-k-rw-no" alt="Photo of Celo Cansino" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
-                        <div class="flex-grow">
-                            <h3 class="text-xl font-bold text-slate-900">Celo Cansino</h3>
-                            <p class="text-amber-600 font-semibold">Senior Director, Workforce</p>
+                    <!-- Top Row -->
+                    <div class="flex flex-wrap justify-center items-stretch gap-8 mb-8">
+                        <!-- Celo Cansino -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjW4d5sSiJBCtRFog8CvBuI2SSnvWEMJfCyM9FnYs_9UCCMQ4JVk8A=s240-p-k-rw-no" alt="Photo of Celo Cansino" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-slate-900">Celo Cansino</h3>
+                                <p class="text-amber-600 font-semibold">Senior Director, Workforce</p>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <!-- Tap Cruz -->
-                    <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
-                        <img src="https://lh3.googleusercontent.com/a-/ALV-UjVIwb3nGzrdP-idqKWRR1klN8wf24ikIbU9hppaMby3iDJzTpj7=s240-p-k-rw-no" alt="Photo of Tap Cruz" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
-                        <div class="flex-grow">
-                            <h3 class="text-xl font-bold text-slate-900">Tap Cruz</h3>
-                            <p class="text-amber-600 font-semibold">Senior Manager, Workforce</p>
+                        
+                        <!-- Tap Cruz -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjVIwb3nGzrdP-idqKWRR1klN8wf24ikIbU9hppaMby3iDJzTpj7=s240-p-k-rw-no" alt="Photo of Tap Cruz" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-slate-900">Tap Cruz</h3>
+                                <p class="text-amber-600 font-semibold">Senior Manager, Workforce</p>
+                            </div>
+                        </div>
+
+                        <!-- Marvin Abello -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjVXI65029zpsAH6LQp82kwN1WH9UQ4Fnc_lkrJ7bL4Nu7e0rbbT=s240-p-k-rw-no" alt="Photo of Marvin Abello" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
+                             <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-slate-900">Marvin Abello</h3>
+                                <p class="text-amber-600 font-semibold">Manager, Workforce</p>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Marvin Abello -->
-                    <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
-                        <img src="https://lh3.googleusercontent.com/a-/ALV-UjVXI65029zpsAH6LQp82kwN1WH9UQ4Fnc_lkrJ7bL4Nu7e0rbbT=s240-p-k-rw-no" alt="Photo of Marvin Abello" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
-                         <div class="flex-grow">
-                            <h3 class="text-xl font-bold text-slate-900">Marvin Abello</h3>
-                            <p class="text-amber-600 font-semibold">Manager, Workforce</p>
+                    <!-- Bottom Row -->
+                    <div class="flex flex-wrap justify-center items-stretch gap-8">
+                        <!-- Joshua Bonife -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjWwga5bC9WnPTLi0qsAT_K1WopFD_X5K7UxCnGv8MsK39Eb_C0=s240-p-k-rw-no" alt="Photo of Joshua Bonife" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-slate-900">Joshua Bonife</h3>
+                                <p class="text-amber-600 font-semibold">Capacity Planner, Workforce</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Paul John Guevarra -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
+                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjVRUXnz2Hgh1RnpYJJ4cacMgEZNTVidgoT9PJu2Yc4aNpBzOnzlkVq40yuaEoXc4P7B_lNZrhRxJQ4AIzF8bWmAa8gmI7zxXu9sKfj1MxmD5zpu5fO0XI35-JYlNeN9rWhE7IHh1KaMZ3ziAiv4Zia4r92hn_yPAbabs72PwydD6amskzDJttucQ5Boe8eSVRI2EQSPzt2A25M6F3M8I--Gk3TY9I_4yJ-njvvq98fbhyrGWYSvX62i-QA9K6EzhH1g0bbx5qbEah6LkfoZH1O3Vz0QXgOVyYDuMF0d_H6Dn-iT4RTTMbNwobN7RJiBgYTohnXECJ6e4l_AMJIQfwYlE8WPdc_cOM4Xmqtq0n6tpxt7WdeddHQq_f0MWcCSBzLLcQYUI5AzFxhi_yRrxVrxOukZrRhau5zfRucd8Yi8oCMiicMS892TqiO1PYwcahE8wD57Ulw9OrVogAl1NjC46vlaBw8TFONvGvAnMwCPESA_aps6yMPgkC2uQrbE_uSNxZnxTDKQmViLaXOqu1Ll4RJD8oW7sAPZy5mkNte2-HS2EsyfIwWod9gC0haJvLWN7f9rLt7WstjvnM4Wu_iGAI0AF-q-gbTzGqYVxKnHIPIpWsStLD36A6xiwX_SL1TRMm7QhcWdf21Ja4Mb5PrNJUPchgDJYskTHqt9Cqju2VxJgAxSKgWpeA-TsZ0TbC4-30QFrUcDzCmbaMsdqzp4SOkMXOrLg8SIGRsECtVLUwINDJR-CoKBAkIzd36B3XJIS8wGZsIPj8CVQLclSfTVzUi6I1lYSCejh8iIVfJDtxB2tc5z-u0D8Q2C9WzBx5AuEaB4k-c-vgjBaY-9jbO5MIKCX4fh1VmITnu5hujuL3JJPrA24b7M1Pbz-97MnOQycazgQLgUcKlB9vKwiUWwKWbAF9eU9QIffeRHqfC4w59f9mpTEPovvd7rHtWKjiFMqyWBs7Bsv_4ka2JVtHDHbnc2CrWyag=s240-p-k-rw-no" alt="Photo of Paul John Guevarra" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
+                             <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-slate-900">Paul John Guevarra</h3>
+                                <p class="text-amber-600 font-semibold">Scheduling Specialist, Workforce</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- Bottom Row -->
-                <div class="flex flex-wrap justify-center items-stretch gap-8">
-                    <!-- Joshua Bonife -->
-                    <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
-                        <img src="https://lh3.googleusercontent.com/a-/ALV-UjWwga5bC9WnPTLi0qsAT_K1WopFD_X5K7UxCnGv8MsK39Eb_C0=s240-p-k-rw-no" alt="Photo of Joshua Bonife" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
-                        <div class="flex-grow">
-                            <h3 class="text-xl font-bold text-slate-900">Joshua Bonife</h3>
-                            <p class="text-amber-600 font-semibold">Capacity Planner, Workforce</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Paul John Guevarra -->
-                    <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
-                        <img src="https://lh3.googleusercontent.com/a-/ALV-UjVRUXnz2Hgh1RnpYJJ4cacMgEZNTVidgoT9PJu2Yc4aNpBzOnzlkVq40yuaEoXc4P7B_lNZrhRxJQ4AIzF8bWmAa8gmI7zxXu9sKfj1MxmD5zpu5fO0XI35-JYlNeN9rWhE7IHh1KaMZ3ziAiv4Zia4r92hn_yPAbabs72PwydD6amskzDJttucQ5Boe8eSVRI2EQSPzt2A25M6F3M8I--Gk3TY9I_4yJ-njvvq98fbhyrGWYSvX62i-QA9K6EzhH1g0bbx5qbEah6LkfoZH1O3Vz0QXgOVyYDuMF0d_H6Dn-iT4RTTMbNwobN7RJiBgYTohnXECJ6e4l_AMJIQfwYlE8WPdc_cOM4Xmqtq0n6tpxt7WdeddHQq_f0MWcCSBzLLcQYUI5AzFxhi_yRrxVrxOukZrRhau5zfRucd8Yi8oCMiicMS892TqiO1PYwcahE8wD57Ulw9OrVogAl1NjC46vlaBw8TFONvGvAnMwCPESA_aps6yMPgkC2uQrbE_uSNxZnxTDKQmViLaXOqu1Ll4RJD8oW7sAPZy5mkNte2-HS2EsyfIwWod9gC0haJvLWN7f9rLt7WstjvnM4Wu_iGAI0AF-q-gbTzGqYVxKnHIPIpWsStLD36A6xiwX_SL1TRMm7QhcWdf21Ja4Mb5PrNJUPchgDJYskTHqt9Cqju2VxJgAxSKgWpeA-TsZ0TbC4-30QFrUcDzCmbaMsdqzp4SOkMXOrLg8SIGRsECtVLUwINDJR-CoKBAkIzd36B3XJIS8wGZsIPj8CVQLclSfTVzUi6I1lYSCejh8iIVfJDtxB2tc5z-u0D8Q2C9WzBx5AuEaB4k-c-vgjBaY-9jbO5MIKCX4fh1VmITnu5hujuL3JJPrA24b7M1Pbz-97MnOQycazgQLgUcKlB9vKwiUWwKWbAF9eU9QIffeRHqfC4w59f9mpTEPovvd7rHtWKjiFMqyWBs7Bsv_4ka2JVtHDHbnc2CrWyag=s240-p-k-rw-no" alt="Photo of Paul John Guevarra" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
-                         <div class="flex-grow">
-                            <h3 class="text-xl font-bold text-slate-900">Paul John Guevarra</h3>
-                            <p class="text-amber-600 font-semibold">Scheduling Specialist, Workforce</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
+                <footer class="mt-20 text-center text-slate-500 text-sm">
+                    <p>INTOUCHCX 2025. ALL RIGHTS RESERVED</p>
+                </footer>
+            </div>
+        </main>
+    </div>
     
     <!-- Daily Flow Modal -->
     <div id="daily-flow-modal" class="fixed inset-0 bg-black bg-opacity-60 items-center justify-center p-4 hidden z-50">
@@ -307,7 +322,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Data and rendering for processes
+            // Process Section Logic
             const processData = {
                 "Scheduling": {
                     "Scheduling Process": { description: "This process outlines the end-to-end procedure for creating, finalizing, and publishing agent schedules.", icon: "calendar-days" },
@@ -354,7 +369,7 @@
                 }
             });
 
-            // Data and rendering for daily flow
+            // Daily Flow Logic
             const dailyFlowContainer = document.getElementById('daily-flow-container');
             const dailyFlowModal = document.getElementById('daily-flow-modal');
             const modalContent = dailyFlowModal.querySelector('div');
@@ -399,8 +414,8 @@
             closeModalBtn.addEventListener('click', closeModal);
             dailyFlowModal.addEventListener('click', (e) => { if (e.target === dailyFlowModal) { closeModal(); } });
             document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !dailyFlowModal.classList.contains('hidden')) { closeModal(); } });
-           
-            // Doughnut chart
+            
+            // Chart.js Logic
             const rolesCtx = document.getElementById('rolesChart').getContext('2d');
             new Chart(rolesCtx, {
                 type: 'doughnut',
@@ -421,33 +436,36 @@
                 }
             });
 
-            // Nav link intersection observer
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
-            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.4 };
-            const observer = new IntersectionObserver((entries) => {
-                let visibleSectionId = null;
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        visibleSectionId = entry.target.getAttribute('id');
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active-nav-link');
-                    if(visibleSectionId && link.getAttribute('href') === `#${visibleSectionId}`) {
-                        link.classList.add('active-nav-link');
-                    }
-                });
-
-            }, observerOptions);
-            sections.forEach(section => { observer.observe(section); });
-            
-            // Initial renders
+            // Initial Render
             renderProcesses(); 
             renderDailyFlow(); 
             lucide.createIcons();
             processListContainer.querySelector('.process-item').click();
+            
+            // Nav Highlighting Logic
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('#sidebar-nav a');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4
+            };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active-nav-link');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+            sections.forEach(section => {
+                observer.observe(section);
+            });
         });
     </script>
 </body>
