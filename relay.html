@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relay WFM Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .active-process {
+            background-color: #ccfbf1; /* teal-100 */
+            color: #0d9488; /* teal-500 */
+            border-right: 4px solid #0d9488;
+        }
+        .process-item:not(.active-process):hover {
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        .daily-flow-card {
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .daily-flow-card:hover {
+            background-color: #f1f5f9; /* slate-100 */
+            transform: translateY(-5px);
+        }
+        .flowchart-step {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .flowchart-step:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.5rem;
+            bottom: -0.5rem;
+            width: 2px;
+            background-color: #2dd4bf; /* teal-400 */
+        }
+        .flowchart-step::after {
+            content: '●';
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            font-size: 1rem;
+            color: #2dd4bf; /* teal-400 */
+        }
+        .suspension-card {
+            transition: all 0.3s ease-in-out;
+        }
+        .suspension-details {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, margin-top 0.3s ease-in-out;
+        }
+        .suspension-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* shadow-lg */
+        }
+        .suspension-card:hover .suspension-details {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+         .suspension-card:hover .suspension-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">Relay WFM Hub</h1>
+            <p class="mt-4 text-lg text-slate-600">Your central resource for all Workforce Management processes.</p>
+        </header>
+
+        <!-- Our Core Processes -->
+        <section id="processes" class="mb-20">
+            <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Our Core Processes</h2>
+            <div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3">
+                    <div class="md:col-span-1 border-r border-slate-200">
+                        <div id="process-list" class="flex flex-col">
+                            <!-- Process items will be injected by JS -->
+                        </div>
+                    </div>
+                    <div id="process-content" class="md:col-span-2 p-8 md:p-12 min-h-[400px] flex flex-col justify-center items-center text-center">
+                        <!-- Content will be injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workforce Daily Flow -->
+        <section id="daily-flow" class="mb-20">
+            <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Workforce Daily Flow</h2>
+            <div id="daily-flow-container" class="grid grid-cols-1 md:grid-cols-5 bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
+                <!-- Daily flow cards will be injected by JS -->
+            </div>
+        </section>
+        
+        <!-- Scheduling & WFM Section -->
+        <section id="scheduling-wfm" class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Scheduling & Workforce Management</h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-8 border border-slate-200">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-teal-600 mb-4">Key Responsibilities</h3>
+                        <p class="mb-6">A successful scheduling week relies on clear roles and timely actions. This chart breaks down the core duties of each team member in the scheduling process.</p>
+                        <div class="space-y-4">
+                            <div class="flex items-center"><span class="h-4 w-4 rounded-full bg-teal-800 mr-3"></span><p><span class="font-bold">Agents:</span> Adhere to schedules and report deviations.</p></div>
+                            <div class="flex items-center"><span class="h-4 w-4 rounded-full bg-teal-600 mr-3"></span><p><span class="font-bold">Team Leads:</span> Monitor teams and communicate updates.</p></div>
+                            <div class="flex items-center"><span class="h-4 w-4 rounded-full bg-teal-400 mr-3"></span><p><span class="font-bold">WFM Team:</span> Plot schedules and notify leads.</p></div>
+                        </div>
+                    </div>
+                    <div class="h-64 md:h-80"><canvas id="rolesChart"></canvas></div>
+                </div>
+                <div class="mt-8 pt-6 border-t border-slate-200">
+                    <h3 class="text-xl font-semibold text-center text-teal-600 mb-6">Key Weekly Deadlines & Events</h3>
+                    <div class="max-w-md mx-auto">
+                        <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-teal-800">Every 15th and 30th of the month.</h4><p>PTO Request dates will be available during these days of the month and up to 45 days from the release date will be available</p></div>
+                        <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-teal-800">Thursday, 10:00 PM MNL</h4><p>PTO Validation and Schedule Change Requests Validation</p></div>
+                        <div class="flowchart-step"><h4 class="font-semibold text-lg text-teal-800">Friday (Thursday Shift) 2:00 AM MNL</h4><p class="font-semibold">Weekly Schedules Published & Locked</p><p class="text-sm text-slate-500">No further changes will be accepted for the week.</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-8 border border-slate-200">
+                 <h3 class="text-2xl font-semibold text-center text-teal-600 mb-6">Plotting Offline Activities</h3>
+                 <p class="text-center text-lg mb-8 max-w-3xl mx-auto">To maintain productivity and ensure accurate reporting, all non-queue activities like coaching, meetings, and training must be scheduled in Assemble.</p>
+                 <div class="max-w-3xl mx-auto">
+                     <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-teal-600">1. Weekly Verification</h4><p>Team Leads check weekly to ensure their team's activities are plotted.</p></div>
+                     <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-teal-600">2. Request Submission</h4><p>If segments are missing, the Team Lead formally requests the WFM team to plot the activity.</p></div>
+                     <div class="flowchart-step"><h4 class="font-semibold text-lg text-teal-600">3. Real-Time Exception</h4><p>For urgent activities, Team Leads must notify the Real-Time Analyst (RTA) at least <span class="font-bold text-teal-800">30 minutes</span> in advance.</p></div>
+                 </div>
+            </div>
+
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 border border-slate-200">
+                    <h3 class="text-2xl font-semibold text-teal-600 mb-4">Schedule Swap & Change Requests</h3>
+                    <p class="mb-6">To ensure fairness and operational stability, all schedule modifications follow a strict set of guidelines.</p>
+                    <ul class="space-y-3 list-disc list-inside text-slate-600">
+                        <li>Requests must be sent <span class="font-bold">2 weeks</span> in advance.</li>
+                        <li>Agents involved must have the <span class="font-bold">same skill set</span>.</li>
+                        <li>Break/lunch swaps are only permitted for <span class="font-bold">medical reasons</span> with documentation.</li>
+                        <li>Email subject must be: <code class="bg-slate-200 text-sm p-1 rounded">Program SWAP/SCHEDULE Request</code>.</li>
+                        <li class="!mt-4"><span class="font-bold text-red-600">Note:</span> Schedules are locked every <span class="font-bold">Thursday at 2:00 AM MNL</span>.</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border border-slate-200">
+                    <h3 class="text-2xl font-semibold text-teal-600 mb-4">Paid Time Off (PTO) Requests</h3>
+                    <p class="mb-6">All PTO requests must be submitted through the official channels within the specified timelines.</p>
+                    <ul class="space-y-3 list-disc list-inside text-slate-600">
+                        <li>File via Program Leave Form at least <span class="font-bold">2 weeks</span> in advance.</li>
+                        <li>Validation deadline is <span class="font-bold">Thursday, 10:00 PM MNL</span>.</li>
+                        <li>The Leave Form must be <span class="font-bold">fully completed</span>.</li>
+                        <li>Vacation Leaves <span class="font-bold">cannot be swapped</span>.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-semibold text-center text-teal-600 mb-6">Schedule Suspension Protocol</h3>
+                <p class="text-center text-lg max-w-4xl mx-auto mb-10">Schedule suspensions are required for extended absences. The process varies significantly based on the reason for the leave.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-teal-600">RTWO</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="font-semibold text-slate-500">3 Unauthorized Absences</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> NOD & Projected Attrition date. Ticket due by Thursday, 10:00 PM MNL.</p></div></div>
+                    <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-teal-600">Medical Leave (MLOA)</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Validated Medical Certificate</p><p><span class="font-semibold">Approver:</span> OM or OD</p><p><span class="font-semibold">Requirement:</span> Clinic-validated MedCert for min. 3 days.</p></div></div>
+                    <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-teal-600">Maternity Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Maternity</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> MedCert with HR approval & completed forms.</p></div></div>
+                    <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-teal-600">Paternity Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Married Employees Only</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> Supporting documents provided to HR.</p></div></div>
+                    <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-teal-600">Termination</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Attrition/Resignation</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> HR acknowledgement and SOM/OD sign-off.</p></div></div>
+                    <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-teal-600">Solo-Parent Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">DSWD ID Required</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> Prior HR approval and official Solo Parent ID.</p></div></div>
+                    <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer md:col-span-2 lg:col-span-1 lg:col-start-2"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-teal-600">Bereavement Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Immediate Family Only</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> Documents provided to HR (regular employees).</p></div></div>
+                    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-lg md:col-span-2 lg:col-span-3"><h4 class="font-bold">Critical Note on Ticket Processing</h4><p>Suspension tickets will be rejected if required approvals are missing, documents are not attached, or the submission is past the deadline.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools & Resources -->
+        <section id="tools" class="mb-20">
+             <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Tools & Resources</h2>
+             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                 <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-200"><h3 class="text-xl font-bold text-teal-600">Tool One</h3></div>
+                 <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-200"><h3 class="text-xl font-bold text-teal-600">Tool Two</h3></div>
+                 <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-200"><h3 class="text-xl font-bold text-teal-600">Resource A</h3></div>
+                 <div class="bg-white p-6 rounded-lg shadow-lg border border-slate-200"><h3 class="text-xl font-bold text-teal-600">Resource B</h3></div>
+             </div>
+        </section>
+
+        <!-- Meet the Team -->
+        <section id="team">
+            <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Meet the WFM Team</h2>
+
+            <!-- Top Row -->
+            <div class="flex flex-wrap justify-center items-stretch gap-8 mb-8">
+                <!-- Celo Cansino -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
+                    <img src="https://lh3.googleusercontent.com/a-/ALV-UjW4d5sSiJBCtRFog8CvBuI2SSnvWEMJfCyM9FnYs_9UCCMQ4JVk8A=s240-p-k-rw-no" alt="Photo of Celo Cansino" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-bold text-slate-900">Celo Cansino</h3>
+                        <p class="text-teal-600 font-semibold">Senior Director, Workforce</p>
+                    </div>
+                </div>
+                
+                <!-- Tap Cruz -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
+                    <img src="https://lh3.googleusercontent.com/a-/ALV-UjVIwb3nGzrdP-idqKWRR1klN8wf24ikIbU9hppaMby3iDJzTpj7=s240-p-k-rw-no" alt="Photo of Tap Cruz" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-bold text-slate-900">Tap Cruz</h3>
+                        <p class="text-teal-600 font-semibold">Senior Manager, Workforce</p>
+                    </div>
+                </div>
+
+                <!-- Marvin Abello -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
+                    <img src="https://lh3.googleusercontent.com/a-/ALV-UjVXI65029zpsAH6LQp82kwN1WH9UQ4Fnc_lkrJ7bL4Nu7e0rbbT=s240-p-k-rw-no" alt="Photo of Marvin Abello" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
+                     <div class="flex-grow">
+                        <h3 class="text-xl font-bold text-slate-900">Marvin Abello</h3>
+                        <p class="text-teal-600 font-semibold">Manager, Workforce</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row -->
+            <div class="flex flex-wrap justify-center items-stretch gap-8">
+                <!-- Joshua Bonife -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
+                    <img src="https://lh3.googleusercontent.com/a-/ALV-UjWwga5bC9WnPTLi0qsAT_K1WopFD_X5K7UxCnGv8MsK39Eb_C0=s240-p-k-rw-no" alt="Photo of Joshua Bonife" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-bold text-slate-900">Joshua Bonife</h3>
+                        <p class="text-teal-600 font-semibold">Capacity Planner, Workforce</p>
+                    </div>
+                </div>
+                
+                <!-- Paul John Guevarra -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
+                    <img src="https://lh3.googleusercontent.com/a-/ALV-UjVRUXnz2Hgh1RnpYJJ4cacMgEZNTVidgoT9PJu2Yc4aNpBzOnzlkVq40yuaEoXc4P7B_lNZrhRxJQ4AIzF8bWmAa8gmI7zxXu9sKfj1MxmD5zpu5fO0XI35-JYlNeN9rWhE7IHh1KaMZ3ziAiv4Zia4r92hn_yPAbabs72PwydD6amskzDJttucQ5Boe8eSVRI2EQSPzt2A25M6F3M8I--Gk3TY9I_4yJ-njvvq98fbhyrGWYSvX62i-QA9K6EzhH1g0bbx5qbEah6LkfoZH1O3Vz0QXgOVyYDuMF0d_H6Dn-iT4RTTMbNwobN7RJiBgYTohnXECJ6e4l_AMJIQfwYlE8WPdc_cOM4Xmqtq0n6tpxt7WdeddHQq_f0MWcCSBzLLcQYUI5AzFxhi_yRrxVrxOukZrRhau5zfRucd8Yi8oCMiicMS892TqiO1PYwcahE8wD57Ulw9OrVogAl1NjC46vlaBw8TFONvGvAnMwCPESA_aps6yMPgkC2uQrbE_uSNxZnxTDKQmViLaXOqu1Ll4RJD8oW7sAPZy5mkNte2-HS2EsyfIwWod9gC0haJvLWN7f9rLt7WstjvnM4Wu_iGAI0AF-q-gbTzGqYVxKnHIPIpWsStLD36A6xiwX_SL1TRMm7QhcWdf21Ja4Mb5PrNJUPchgDJYskTHqt9Cqju2VxJgAxSKgWpeA-TsZ0TbC4-30QFrUcDzCmbaMsdqzp4SOkMXOrLg8SIGRsECtVLUwINDJR-CoKBAkIzd36B3XJIS8wGZsIPj8CVQLclSfTVzUi6I1lYSCejh8iIVfJDtxB2tc5z-u0D8Q2C9WzBx5AuEaB4k-c-vgjBaY-9jbO5MIKCX4fh1VmITnu5hujuL3JJPrA24b7M1Pbz-97MnOQycazgQLgUcKlB9vKwiUWwKWbAF9eU9QIffeRHqfC4w59f9mpTEPovvd7rHtWKjiFMqyWBs7Bsv_4ka2JVtHDHbnc2CrWyag=s240-p-k-rw-no" alt="Photo of Paul John Guevarra" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
+                     <div class="flex-grow">
+                        <h3 class="text-xl font-bold text-slate-900">Paul John Guevarra</h3>
+                        <p class="text-teal-600 font-semibold">Scheduling Specialist, Workforce</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-20 text-center text-slate-500 text-sm">
+            <p>INTOUCHCX 2025. ALL RIGHTS RESERVED</p>
+        </footer>
+    </div>
+    
+    <!-- Daily Flow Modal -->
+    <div id="daily-flow-modal" class="fixed inset-0 bg-black bg-opacity-60 items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-2xl max-w-2xl w-full relative transform transition-all duration-300 scale-95 opacity-0">
+            <div id="modal-header" class="p-5 flex items-center justify-between border-b-4">
+                <h3 id="modal-title" class="text-2xl font-semibold text-white"></h3>
+                <button type="button" id="close-modal-btn" class="text-white bg-transparent hover:bg-white/20 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center">
+                    <i data-lucide="x" class="w-5 h-5"></i><span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <div id="modal-body" class="p-6 space-y-4 text-lg leading-relaxed text-slate-600"></div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const processData = {
+                "Scheduling": {
+                    "Scheduling Process": { description: "This process outlines the end-to-end procedure for creating, finalizing, and publishing agent schedules.", icon: "calendar-days" },
+                    "Schedule Change / Swap Process": { description: "This defines the protocol for agents to request a change to their schedule or to swap shifts with a colleague.", icon: "arrow-right-left" },
+                    "Offline Activity Plotting": { description: "This process details how to properly schedule non-phone activities such as training, coaching, and meetings.", icon: "clipboard-pen-line" },
+                    "Leave Request": { description: "The procedure for submitting, approving, and tracking all types of leave (e.g., vacation, sick, personal).", icon: "plane" },
+                    "Schedule Suspension": { description: "This protocol is enacted during unforeseen circumstances, such as system outages or emergencies.", icon: "pause-circle" }
+                },
+                "Real Time Management": {
+                    "Queue Management": { description: "Real-time monitoring of incoming contact queues to make intra-day adjustments.", icon: "users" },
+                    "AHOD Process": { description: "A critical response process initiated during unexpectedly high call volumes or staff shortages.", icon: "siren" },
+                    "Aux Codes": { description: "A comprehensive guide to the proper usage of Aux codes, which represent specific non-productive states.", icon: "tags" },
+                    "Real Time Request": { description: "This covers the system for agents to make immediate requests, such as for an unscheduled break.", icon: "send" },
+                    "Adherence": { description: "Schedule Adherence measures how well an agent sticks to their scheduled activities.", icon: "target" },
+                    "Attendance": { description: "This policy details the company's expectations regarding punctuality and attendance.", icon: "user-check" },
+                    "Outage Process": { description: "A step-by-step procedure to be followed during a technical outage.", icon: "server-crash" },
+                    "RTA Violation": { description: "Defines what constitutes a Real-Time Adherence (RTA) violation and the process for addressing them.", icon: "shield-alert" }
+                }
+            };
+            const processListContainer = document.getElementById('process-list');
+            const processContentContainer = document.getElementById('process-content');
+            const renderProcesses = () => {
+                const categoryIcons = { "Scheduling": "calendar-clock", "Real Time Management": "history" };
+                let html = '';
+                for (const category in processData) {
+                    html += `<div class="flex items-center gap-3 p-4 bg-slate-100 border-b border-slate-200"><i data-lucide="${categoryIcons[category]}" class="w-5 h-5 text-teal-600"></i><h3 class="text-lg font-bold text-slate-800">${category}</h3></div>`;
+                    for (const item in processData[category]) {
+                         html += `<div class="process-item cursor-pointer p-4 border-b border-slate-200 text-slate-600 font-medium" data-category="${category}" data-item="${item}">${item}</div>`;
+                    }
+                }
+                processListContainer.innerHTML = html;
+            };
+            const renderContent = (category, item) => {
+                const { description, icon } = processData[category][item];
+                processContentContainer.innerHTML = `<div class="text-center"><div class="w-16 h-16 rounded-full bg-teal-100 mx-auto mb-6 flex items-center justify-center"><i data-lucide="${icon}" class="w-8 h-8 text-teal-500"></i></div><h3 class="text-2xl font-bold text-slate-900 mb-2">${item}</h3><p class="text-lg text-slate-600">${description}</p></div>`;
+                lucide.createIcons();
+            };
+            processListContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('process-item')) {
+                    const allItems = processListContainer.querySelectorAll('.process-item');
+                    allItems.forEach(el => el.classList.remove('active-process'));
+                    e.target.classList.add('active-process');
+                    renderContent(e.target.dataset.category, e.target.dataset.item);
+                }
+            });
+            const dailyFlowContainer = document.getElementById('daily-flow-container');
+            const dailyFlowModal = document.getElementById('daily-flow-modal');
+            const modalContent = dailyFlowModal.querySelector('div');
+            const modalHeader = document.getElementById('modal-header');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const dailyFlowData = {
+                monday: { title: "Monday", color: "bg-teal-400", task: "Leading the headcount reconciliation for all programs", details: "<strong>Task:</strong> Cross-check the headcount listed in the official workforce roster file against the actual headcount reported by operations.<br><strong>Objective:</strong> Identify and resolve any discrepancies immediately to ensure accurate staffing records for the week." },
+                tuesday: { title: "Tuesday", color: "bg-amber-400", task: "Plotting of PTOs for the following week & Updating of Capacity Files", details: "<strong>Objective:</strong> Approve and schedule employee leave requests for the upcoming week without impacting operational coverage. Update capacity files with the latest staffing and forecast information." },
+                wednesday: { title: "Wednesday", color: "bg-teal-400", task: "Creating schedules for the following week. Capacity call discussion for all programs.", details: "<strong>Schedule Creation:</strong> Generate employee schedules based on forecast models. <br><strong>Capacity Call:</strong> A key meeting with operations leaders to discuss staffing levels, identify potential gaps, and strategize solutions." },
+                thursday: { title: "Thursday", color: "bg-amber-400", task: "Publishing of schedules and making changes if there are any.", details: "<strong>Objective:</strong> To provide employees with their finalized schedules in a timely manner.<br><strong>Process:</strong> The finalized schedule is uploaded to the workforce management portal." },
+                friday: { title: "Friday", color: "bg-teal-400", task: "Weekly client sync", details: "<strong>Objective:</strong> Review the previous week's performance metrics, discuss the upcoming week's staffing plan, and address any client concerns." },
+            };
+            const renderDailyFlow = () => {
+                dailyFlowContainer.innerHTML = Object.entries(dailyFlowData).map(([day, data]) => `
+                    <div id="${day}" class="daily-flow-card flex flex-col cursor-pointer border-r border-slate-200 last:border-r-0">
+                        <div class="p-6 h-48 flex items-center justify-center">
+                             <div class="w-24 h-24 rounded-full border-4 flex justify-center items-center ${day === 'tuesday' || day === 'thursday' ? 'border-amber-400' : 'border-teal-400'}">
+                                <i data-lucide="users" class="w-12 h-12 ${day === 'tuesday' || day === 'thursday' ? 'text-amber-400' : 'text-teal-400'}"></i>
+                            </div>
+                        </div>
+                        <div class="${data.color} w-full p-3 text-center text-white font-bold text-lg">${data.title}</div>
+                        <div class="p-6 text-center text-slate-600 flex-grow flex items-center justify-center">${data.task}</div>
+                    </div>
+                `).join('');
+            };
+            const openModal = (day) => {
+                const data = dailyFlowData[day];
+                modalTitle.textContent = `${data.title}: Key Activities`;
+                modalBody.innerHTML = data.details;
+                modalHeader.className = `p-5 flex items-center justify-between border-b-4 ${data.color}`;
+                dailyFlowModal.classList.remove('hidden'); dailyFlowModal.classList.add('flex');
+                setTimeout(() => { modalContent.classList.remove('scale-95', 'opacity-0'); modalContent.classList.add('scale-100', 'opacity-100'); }, 10);
+                lucide.createIcons();
+            };
+            const closeModal = () => {
+                modalContent.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => { dailyFlowModal.classList.add('hidden'); dailyFlowModal.classList.remove('flex'); }, 300);
+            };
+            dailyFlowContainer.addEventListener('click', (e) => { const card = e.target.closest('.daily-flow-card'); if (card) { openModal(card.id); } });
+            closeModalBtn.addEventListener('click', closeModal);
+            dailyFlowModal.addEventListener('click', (e) => { if (e.target === dailyFlowModal) { closeModal(); } });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !dailyFlowModal.classList.contains('hidden')) { closeModal(); } });
+            const rolesCtx = document.getElementById('rolesChart').getContext('2d');
+            new Chart(rolesCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Agents', 'Team Leads', 'WFM Team'],
+                    datasets: [{
+                        label: 'Responsibilities',
+                        data: [40, 35, 25],
+                        backgroundColor: ['#134e4a', '#0d9488', '#2dd4bf'], // teal-800, teal-600, teal-400
+                        borderColor: '#f8fafc',
+                        borderWidth: 4, hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { title: (tooltipItems) => tooltipItems[0].label } } },
+                    cutout: '70%'
+                }
+            });
+            renderProcesses(); renderDailyFlow(); lucide.createIcons();
+            processListContainer.querySelector('.process-item').click();
+        });
+    </script>
+</body>
+</html>
+
+
