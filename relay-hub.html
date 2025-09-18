@@ -53,7 +53,7 @@
         <main class="flex-1">
             <div class="container mx-auto p-4 sm:p-6 lg:p-8">
                 <header class="text-center mb-16"><h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">Relay WFM Hub</h1><p class="mt-4 text-lg text-slate-600">Your central resource for all Workforce Management processes.</p></header>
-                <section id="processes" class="mb-20"><h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Our Core Processes</h2><div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden"><div class="grid grid-cols-1 md:grid-cols-3"><div class="md:col-span-1 border-r border-slate-200"><div id="process-list" class="flex flex-col"></div></div><div id="process-content" class="md:col-span-2 p-8 md:p-12 min-h-[400px] flex items-center"></div></div></div></section>
+                <section id="processes" class="mb-20"><h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Our Core Processes</h2><div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden"><div class="grid grid-cols-1 md:grid-cols-3"><div class="md-col-span-1 border-r border-slate-200"><div id="process-list" class="flex flex-col"></div></div><div id="process-content" class="md:col-span-2 p-8 md:p-12 min-h-[400px] flex items-center"></div></div></div></section>
                 <section id="daily-flow" class="mb-20"><h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Workforce Daily Flow</h2><div id="daily-flow-container" class="grid grid-cols-1 md:grid-cols-5 bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden"></div></section>
                 <section id="scheduling-wfm" class="mb-16">
                     <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Scheduling & Workforce Management</h2>
@@ -78,7 +78,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-8 border border-slate-200">
+                     <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-8 border border-slate-200">
                         <h3 class="text-2xl font-semibold text-center text-teal-600 mb-6">PTO Request Guidelines</h3>
                         <div class="max-w-3xl mx-auto">
                              <ul class="space-y-3 list-disc list-inside text-slate-700 mb-6">
@@ -260,52 +260,61 @@
                             </div>
                         </div>`,icon:"calendar-days"},"Capacity Planning":{description:`
                         <div class="text-left space-y-6">
-                             <!-- Step 1 -->
                             <div class="p-4 rounded-lg border-2 border-teal-200 bg-teal-50">
                                 <div class="flex items-center gap-3 mb-2">
-                                    <i data-lucide="line-chart" class="w-6 h-6 text-teal-700"></i>
-                                    <h4 class="font-bold text-xl text-teal-800">1. Our Forecasting & Data Gathering</h4>
+                                    <i data-lucide="database-zap" class="w-6 h-6 text-teal-700"></i>
+                                    <h4 class="font-bold text-xl text-teal-800">1. We Collect Inputs and Assumptions</h4>
                                 </div>
-                                <p class="text-slate-700 mb-2">Our entire capacity plan is built on an accurate forecast. To do this, we perform:</p>
+                                <p class="text-slate-700 mb-2">The foundation of our plan. We gather critical data including:</p>
                                 <ul class="space-y-2 list-disc list-inside ml-4 text-slate-700">
-                                    <li><strong>Historical Data Analysis:</strong> We analyze past contact volumes, arrival patterns, and Average Handle Time (AHT) to identify trends and seasonality.</li>
-                                    <li><strong>Business Intelligence:</strong> We incorporate input from marketing and operations on upcoming campaigns or other events that could impact our volume.</li>
+                                    <li><strong>Project & Ramp Plans:</strong> To understand growth or seasonal changes.</li>
+                                    <li><strong>Historical Data:</strong> We analyze past trends in volume and AHT.</li>
+                                    <li><strong>Business Updates:</strong> We account for upcoming holidays, marketing events, and potential system downtime.</li>
                                 </ul>
                             </div>
-                             <!-- Arrow Down -->
-                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
-                             <!-- Step 2 -->
-                            <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                             <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
                                 <div class="flex items-center gap-3 mb-2">
                                     <i data-lucide="calculator" class="w-6 h-6 text-slate-700"></i>
-                                    <h4 class="font-bold text-xl text-slate-800">2. How We Calculate Required FTEs</h4>
+                                    <h4 class="font-bold text-xl text-slate-800">2. We Calculate Staffing Requirements</h4>
                                 </div>
-                                <p class="text-slate-700">Using our forecast, we calculate the number of <strong>FTEs (Full-Time Equivalents)</strong> required to meet our service level targets (e.g., 80/20). For this, we use an <strong>Erlang C</strong> calculator, which is the standard for our industry.</p>
+                                <p class="text-slate-700">Using the collected data, we determine our baseline staffing needs. Our primary method is using an <strong>Erlang C</strong> model to ensure we meet our service level targets based on the forecasted workload.</p>
                             </div>
-                             <!-- Arrow Down -->
                             <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
-                              <!-- Step 3 -->
-                            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                             <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
                                 <div class="flex items-center gap-3 mb-2">
-                                    <i data-lucide="umbrella" class="w-6 h-6 text-amber-700"></i>
-                                    <h4 class="font-bold text-xl text-amber-800">3. Factoring for Shrinkage</h4>
+                                    <i data-lucide="user-check" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">3. We Verify Staffing Projections</h4>
                                 </div>
-                                <p class="text-slate-700 mb-2">Here in the Philippines, accounting for <strong>shrinkage</strong>—the time agents are paid but unavailable for calls—is critical. We must account for:</p>
+                                <p class="text-slate-700 mb-2">We check our initial projections against reality and optimize where needed. This includes:</p>
                                  <ul class="space-y-2 list-disc list-inside ml-4 text-slate-700">
-                                    <li><strong>Planned Shrinkage:</strong> Breaks, lunches, team meetings, coaching, and PTO.</li>
-                                    <li><strong>Unplanned Shrinkage:</strong> Absenteeism, tardiness, and system downtime.</li>
+                                    <li>Proposing a <strong>Hiring Plan</strong> to Talent Acquisition if we foresee a staffing gap.</li>
+                                    <li>Optimizing current staff through strategic OT/VTO offers or cross-skilling initiatives.</li>
                                 </ul>
                             </div>
-                            <!-- Arrow Down -->
                             <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
-                             <!-- Step 4 -->
-                            <div class="p-4 rounded-lg border-2 border-green-200 bg-green-50">
+                            <div class="p-4 rounded-lg border-2 border-teal-200 bg-teal-50">
                                 <div class="flex items-center gap-3 mb-2">
-                                    <i data-lucide="users-plus" class="w-6 h-6 text-green-700"></i>
-                                    <h4 class="font-bold text-xl text-green-800">4. Determining Our Final FTEs</h4>
+                                    <i data-lucide="presentation" class="w-6 h-6 text-teal-700"></i>
+                                    <h4 class="font-bold text-xl text-teal-800">4. We Present the Capacity Plan</h4>
                                 </div>
-                                <p class="text-slate-700 mb-2">The final step is to combine our required FTEs with the total shrinkage percentage. This gives us the actual number of FTEs we need on our payroll to hit our targets.</p>
-                                <code class="bg-slate-200 text-slate-800 p-2 rounded-md block text-center">Required FTEs / (1 - Total Shrinkage %) = Final FTEs</code>
+                                <p class="text-slate-700">We present our findings, recommendations, and assumptions to all key stakeholders, including Operations and the client, to get their feedback and formal sign-off.</p>
+                            </div>
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-green-200 bg-green-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="send" class="w-6 h-6 text-green-700"></i>
+                                    <h4 class="font-bold text-xl text-green-800">5. We Publish the Plan</h4>
+                                </div>
+                                <p class="text-slate-700">Once approved, we publish the official Capacity Plan for a locked period and notify all stakeholders of any critical dates or impacts. This plan becomes the blueprint for our scheduling team.</p>
+                            </div>
+                             <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="refresh-cw" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">6. We Manage Change</h4>
+                                </div>
+                                <p class="text-slate-700">The business environment is dynamic. We have a process to handle revision requests from stakeholders and proactively make adjustments as needed, maintaining a clear version control log for all changes.</p>
                             </div>
                         </div>
                     `,icon:"bar-chart-big"},"Schedule Change / Swap Process":{description:`
