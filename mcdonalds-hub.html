@@ -11,87 +11,28 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* slate-50 */
-        }
-        .active-process {
-            background-color: #fef3c7; /* amber-100 */
-            color: #d97706; /* amber-500 */
-            border-right: 4px solid #d97706;
-        }
-        .process-item:not(.active-process):hover {
-            background-color: #f1f5f9; /* slate-100 */
-        }
-        .daily-flow-card {
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        .daily-flow-card:hover {
-            background-color: #f1f5f9; /* slate-100 */
-            transform: translateY(-5px);
-        }
-        .flowchart-step {
-            position: relative;
-            padding-left: 1.5rem;
-        }
-        .flowchart-step:not(:last-child)::before {
-            content: '';
-            position: absolute;
-            left: 5px;
-            top: 1.5rem;
-            bottom: -0.5rem;
-            width: 2px;
-            background-color: #fbbf24; /* amber-400 */
-        }
-        .flowchart-step::after {
-            content: '●';
-            position: absolute;
-            left: 0;
-            top: 0.25rem;
-            font-size: 1rem;
-            color: #fbbf24; /* amber-400 */
-        }
-        .suspension-card {
-            transition: all 0.3s ease-in-out;
-        }
-        .suspension-details {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, margin-top 0.3s ease-in-out;
-        }
-        .suspension-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* shadow-lg */
-        }
-        .suspension-card:hover .suspension-details {
-            max-height: 200px;
-            opacity: 1;
-            margin-top: 1rem;
-        }
-         .suspension-card:hover .suspension-icon {
-            transform: rotate(180deg);
-        }
-        .nav-link {
-            transition: all 0.2s ease-in-out;
-        }
-        .active-nav-link {
-            background-color: #fef3c7; /* amber-100 */
-            color: #d97706; /* amber-500 */
-            font-weight: 600; /* semibold */
-            border-left: 4px solid #d97706;
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .active-process { background-color: #fef3c7; color: #d97706; border-right: 4px solid #d97706; }
+        .process-item:not(.active-process):hover { background-color: #f1f5f9; }
+        .daily-flow-card { transition: background-color 0.3s ease, transform 0.2s ease; }
+        .daily-flow-card:hover { background-color: #f1f5f9; transform: translateY(-5px); }
+        .flowchart-step { position: relative; padding-left: 1.5rem; }
+        .flowchart-step:not(:last-child)::before { content: ''; position: absolute; left: 5px; top: 1.5rem; bottom: -0.5rem; width: 2px; background-color: #fbbf24; }
+        .flowchart-step::after { content: '●'; position: absolute; left: 0; top: 0.25rem; font-size: 1rem; color: #fbbf24; }
+        .suspension-card { transition: all 0.3s ease-in-out; }
+        .suspension-details { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, margin-top 0.3s ease-in-out; }
+        .suspension-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .suspension-card:hover .suspension-details { max-height: 200px; opacity: 1; margin-top: 1rem; }
+        .suspension-card:hover .suspension-icon { transform: rotate(180deg); }
+        .nav-link { transition: all 0.2s ease-in-out; }
+        .active-nav-link { background-color: #fef3c7; color: #d97706; font-weight: 600; border-left: 4px solid #d97706; }
     </style>
 </head>
 <body class="text-slate-700">
-
     <div class="relative min-h-screen lg:flex">
         <!-- Navigation Sidebar -->
         <nav id="sidebar-nav" class="hidden lg:block sticky top-0 h-screen bg-white w-64 flex-shrink-0 border-r border-slate-200 overflow-y-auto">
-            <div class="p-4 border-b border-slate-200 text-center">
-                <h2 class="text-xl font-bold text-slate-800">McDonald's Hub</h2>
-                <p class="text-sm text-slate-500">Navigation</p>
-            </div>
+            <div class="p-4 border-b border-slate-200 text-center"><h2 class="text-xl font-bold text-slate-800">McDonald's Hub</h2><p class="text-sm text-slate-500">Navigation</p></div>
             <ul class="flex flex-col py-4">
                 <li><a href="#processes" class="nav-link flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100"><i data-lucide="layout-list" class="w-5 h-5"></i><span>Core Processes</span></a></li>
                 <li><a href="#daily-flow" class="nav-link flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100"><i data-lucide="calendar-days" class="w-5 h-5"></i><span>Daily Flow</span></a></li>
@@ -99,373 +40,769 @@
                 <li><a href="#tools" class="nav-link flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100"><i data-lucide="wrench" class="w-5 h-5"></i><span>Tools & Resources</span></a></li>
                 <li><a href="#team" class="nav-link flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100"><i data-lucide="users" class="w-5 h-5"></i><span>Meet the Team</span></a></li>
             </ul>
-             <div class="px-4 mt-4">
-                <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Other Hubs</h3>
-            </div>
+            <div class="px-4 mt-4"><h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Other Hubs</h3></div>
             <ul class="flex flex-col pt-2 pb-4">
-                 <li><a href="./lifesafer-hub.html" class="nav-link flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-slate-800 text-sm"><i data-lucide="shield" class="w-4 h-4 text-sky-500"></i><span>LifeSafer Hub</span></a></li>
+                 <li><a href="./lifesafer-hub.html" class="nav-link flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-slate-800 text-sm"><i data-lucide="shield-check" class="w-4 h-4 text-sky-500"></i><span>LifeSafer Hub</span></a></li>
                  <li><a href="./lyft-hub.html" class="nav-link flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-slate-800 text-sm"><i data-lucide="car" class="w-4 h-4 text-pink-500"></i><span>Lyft Hub</span></a></li>
                  <li><a href="./general-mills-hub.html" class="nav-link flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-slate-800 text-sm"><i data-lucide="cookie" class="w-4 h-4 text-indigo-500"></i><span>General Mills Hub</span></a></li>
                  <li><a href="./figma-hub.html" class="nav-link flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-slate-800 text-sm"><i data-lucide="pen-tool" class="w-4 h-4 text-fuchsia-500"></i><span>Figma Hub</span></a></li>
                  <li><a href="./relay-hub.html" class="nav-link flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-slate-800 text-sm"><i data-lucide="server" class="w-4 h-4 text-teal-500"></i><span>Relay Hub</span></a></li>
             </ul>
         </nav>
-
         <!-- Main Content -->
         <main class="flex-1">
             <div class="container mx-auto p-4 sm:p-6 lg:p-8">
-                <header class="text-center mb-16">
-                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">McDonald's WFM Hub</h1>
-                    <p class="mt-4 text-lg text-slate-600">Your central resource for all Workforce Management processes.</p>
-                </header>
-
-                <!-- Our Core Processes -->
-                <section id="processes" class="mb-20">
-                    <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Our Core Processes</h2>
-                    <div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
-                        <div class="grid grid-cols-1 md:grid-cols-3">
-                            <div class="md:col-span-1 border-r border-slate-200">
-                                <div id="process-list" class="flex flex-col">
-                                    <!-- Process items will be injected by JS -->
-                                </div>
-                            </div>
-                            <div id="process-content" class="md:col-span-2 p-8 md:p-12 min-h-[400px] flex flex-col justify-center items-center text-center">
-                                <!-- Content will be injected by JS -->
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Workforce Daily Flow -->
-                <section id="daily-flow" class="mb-20">
-                    <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Workforce Daily Flow</h2>
-                    <div id="daily-flow-container" class="grid grid-cols-1 md:grid-cols-5 bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
-                        <!-- Daily flow cards will be injected by JS -->
-                    </div>
-                </section>
-                
-                <!-- Scheduling & WFM Section -->
+                <header class="text-center mb-16"><h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">McDonald's WFM Hub</h1><p class="mt-4 text-lg text-slate-600">Your central resource for all Workforce Management processes.</p></header>
+                <section id="processes" class="mb-20"><h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Our Core Processes</h2><div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden"><div class="grid grid-cols-1 md:grid-cols-3"><div class="md-col-span-1 border-r border-slate-200"><div id="process-list" class="flex flex-col"></div></div><div id="process-content" class="md:col-span-2 p-8 md:p-12 min-h-[400px] flex items-center"></div></div></div></section>
+                <section id="daily-flow" class="mb-20"><h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Workforce Daily Flow</h2><div id="daily-flow-container" class="grid grid-cols-1 md:grid-cols-5 bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden"></div></section>
                 <section id="scheduling-wfm" class="mb-16">
                     <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Scheduling & Workforce Management</h2>
-                    
-                    <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-8 border border-slate-200">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                            <div>
-                                <h3 class="text-2xl font-semibold text-amber-600 mb-4">Key Responsibilities</h3>
-                                <p class="mb-6">A successful scheduling week relies on clear roles and timely actions. This chart breaks down the core duties of each team member in the scheduling process.</p>
-                                <div class="space-y-4">
-                                    <div class="flex items-center"><span class="h-4 w-4 rounded-full bg-amber-800 mr-3"></span><p><span class="font-bold">Agents:</span> Adhere to schedules and report deviations.</p></div>
-                                    <div class="flex items-center"><span class="h-4 w-4 rounded-full bg-amber-600 mr-3"></span><p><span class="font-bold">Team Leads:</span> Monitor teams and communicate updates.</p></div>
-                                    <div class="flex items-center"><span class="h-4 w-4 rounded-full bg-amber-400 mr-3"></span><p><span class="font-bold">WFM Team:</span> Plot schedules and notify leads.</p></div>
-                                </div>
-                            </div>
-                            <div class="h-64 md:h-80"><canvas id="rolesChart"></canvas></div>
-                        </div>
-                        <div class="mt-8 pt-6 border-t border-slate-200">
-                            <h3 class="text-xl font-semibold text-center text-amber-600 mb-6">Key Weekly Deadlines & Events</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                        <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 border border-slate-200 h-full">
+                            <h3 class="text-2xl font-semibold text-center text-amber-600 mb-6">Key Weekly Deadlines & Events</h3>
                             <div class="max-w-md mx-auto">
                                 <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-amber-800">Every 15th and 30th of the month.</h4><p>PTO Request dates will be available during these days of the month and up to 45 days from the release date will be available</p></div>
                                 <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-amber-800">Thursday, 10:00 PM MNL</h4><p>PTO Validation and Schedule Change Requests Validation</p></div>
                                 <div class="flowchart-step"><h4 class="font-semibold text-lg text-amber-800">Friday (Thursday Shift) 2:00 AM MNL</h4><p class="font-semibold">Weekly Schedules Published & Locked</p><p class="text-sm text-slate-500">No further changes will be accepted for the week.</p></div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-8 border border-slate-200">
-                         <h3 class="text-2xl font-semibold text-center text-amber-600 mb-6">Plotting Offline Activities</h3>
-                         <p class="text-center text-lg mb-8 max-w-3xl mx-auto">To maintain productivity and ensure accurate reporting, all non-queue activities like coaching, meetings, and training must be scheduled in Assemble.</p>
-                         <div class="max-w-3xl mx-auto">
-                             <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-amber-600">1. Weekly Verification</h4><p>Team Leads check weekly to ensure their team's activities are plotted.</p></div>
-                             <div class="flowchart-step mb-4"><h4 class="font-semibold text-lg text-amber-600">2. Request Submission</h4><p>If segments are missing, the Team Lead formally requests the WFM team to plot the activity.</p></div>
-                             <div class="flowchart-step"><h4 class="font-semibold text-lg text-amber-600">3. Real-Time Exception</h4><p>For urgent activities, Team Leads must notify the Real-Time Analyst (RTA) at least <span class="font-bold text-amber-800">30 minutes</span> in advance.</p></div>
-                         </div>
-                    </div>
-
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                        <div class="bg-white rounded-lg shadow-lg p-6 border border-slate-200">
-                            <h3 class="text-2xl font-semibold text-amber-600 mb-4">Schedule Swap & Change Requests</h3>
-                            <p class="mb-6">To ensure fairness and operational stability, all schedule modifications follow a strict set of guidelines.</p>
-                            <ul class="space-y-3 list-disc list-inside text-slate-600">
+                        <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 border border-slate-200 h-full">
+                            <h3 class="text-2xl font-semibold text-center text-amber-600 mb-6">Schedule Swap & Change Requests</h3>
+                            <p class="text-center max-w-3xl mx-auto mb-6">To ensure fairness and operational stability, all schedule modifications follow a strict set of guidelines.</p>
+                            <ul class="space-y-3 list-disc list-inside text-slate-700">
                                 <li>Requests must be sent <span class="font-bold">2 weeks</span> in advance.</li>
                                 <li>Agents involved must have the <span class="font-bold">same skill set</span>.</li>
                                 <li>Break/lunch swaps are only permitted for <span class="font-bold">medical reasons</span> with documentation.</li>
                                 <li>Email subject must be: <code class="bg-slate-200 text-sm p-1 rounded">Program SWAP/SCHEDULE Request</code>.</li>
-                                <li class="!mt-4"><span class="font-bold text-red-600">Note:</span> Schedules are locked every <span class="font-bold">Thursday at 2:00 AM MNL</span>.</li>
-                            </ul>
-                        </div>
-                        <div class="bg-white rounded-lg shadow-lg p-6 border border-slate-200">
-                            <h3 class="text-2xl font-semibold text-amber-600 mb-4">Paid Time Off (PTO) Requests</h3>
-                            <p class="mb-6">All PTO requests must be submitted through the official channels within the specified timelines.</p>
-                            <ul class="space-y-3 list-disc list-inside text-slate-600">
-                                <li>File via Program Leave Form at least <span class="font-bold">2 weeks</span> in advance.</li>
-                                <li>Validation deadline is <span class="font-bold">Thursday, 10:00 PM MNL</span>.</li>
-                                <li>The Leave Form must be <span class="font-bold">fully completed</span>.</li>
-                                <li>Vacation Leaves <span class="font-bold">cannot be swapped</span>.</li>
+                                <li class="!mt-4"><span class="font-bold text-red-600">Note:</span> Schedules are locked every <span class="font-bold">Friday at 2:00 AM MNL (Thursday Shift)</span>. No changes are accepted after this deadline for the upcoming week.</li>
                             </ul>
                         </div>
                     </div>
-                    
-                    <div>
-                        <h3 class="text-2xl font-semibold text-center text-amber-600 mb-6">Schedule Suspension Protocol</h3>
-                        <p class="text-center text-lg max-w-4xl mx-auto mb-10">Schedule suspensions are required for extended absences. The process varies significantly based on the reason for the leave.</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">RTWO</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="font-semibold text-slate-500">3 Unauthorized Absences</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> NOD & Projected Attrition date. Ticket due by Thursday, 10:00 PM MNL.</p></div></div>
-                            <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Medical Leave (MLOA)</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Validated Medical Certificate</p><p><span class="font-semibold">Approver:</span> OM or OD</p><p><span class="font-semibold">Requirement:</span> Clinic-validated MedCert for min. 3 days.</p></div></div>
-                            <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Maternity Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Maternity</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> MedCert with HR approval & completed forms.</p></div></div>
-                            <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Paternity Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Married Employees Only</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> Supporting documents provided to HR.</p></div></div>
-                            <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Termination</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Attrition/Resignation</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> HR acknowledgement and SOM/OD sign-off.</p></div></div>
-                            <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Solo-Parent Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">DSWD ID Required</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> Prior HR approval and official Solo Parent ID.</p></div></div>
-                            <div class="suspension-card bg-white rounded-lg shadow-lg p-6 border border-slate-200 cursor-pointer md:col-span-2 lg:col-span-1 lg:col-start-2"><div class="flex justify-between items-center"><h4 class="font-bold text-xl text-amber-600">Bereavement Leave</h4><i data-lucide="chevron-down" class="suspension-icon transition-transform duration-300"></i></div><div class="suspension-details text-slate-600 space-y-2 text-sm"><p class="text-sm font-semibold text-slate-500">Immediate Family Only</p><p><span class="font-semibold">Approver:</span> OM/OD/HR</p><p><span class="font-semibold">Requirement:</span> Documents provided to HR (regular employees).</p></div></div>
-                            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-lg md:col-span-2 lg:col-span-3"><h4 class="font-bold">Critical Note on Ticket Processing</h4><p>Suspension tickets will be rejected if required approvals are missing, documents are not attached, or the submission is past the deadline.</p></div>
+                     <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-8 border border-slate-200">
+                        <h3 class="text-2xl font-semibold text-center text-amber-600 mb-6">PTO Request Process</h3>
+                        <div class="text-left space-y-6">
+                            <!-- Agent -->
+                            <div class="p-4 rounded-lg border-2 border-red-200 bg-red-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="user" class="w-6 h-6 text-red-700"></i>
+                                    <h4 class="font-bold text-xl text-red-800">1. Agent Informs Team Lead</h4>
+                                </div>
+                                <p class="text-slate-700">The agent verbally informs their Team Lead of their intention to file for Paid Time Off.</p>
+                            </div>
+                             <!-- Arrow Down -->
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <!-- Team Lead -->
+                            <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="clipboard-list" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">2. Team Lead Adds to Tracker</h4>
+                                </div>
+                                <p class="text-slate-700">The Team Lead adds the agent's request to their official PTO tracker for documentation.</p>
+                            </div>
+                             <!-- Arrow Down -->
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <!-- OM Approval -->
+                             <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="user-check" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">3. Operations Manager Approves</h4>
+                                </div>
+                                <p class="text-slate-700">The tracker is reviewed by the Operations Manager, <strong class="font-medium">Miles</strong>, who provides the final approval for all PTO requests.</p>
+                            </div>
+                             <!-- Arrow Down -->
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <!-- WFM Plotting -->
+                            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="calendar-plus" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">4. WFM Plots Approved Leaves</h4>
+                                </div>
+                                <p class="text-slate-700">Every week, our WFM team plots all approved leaves in IEX before the end of the Thursday shift, ensuring the master schedule is accurate.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 mb-8 border border-slate-200">
+                         <h3 class="text-2xl font-semibold text-center text-amber-600 mb-6">Schedule Suspension Protocol</h3>
+                         <p class="text-center max-w-3xl mx-auto mb-10">Schedule suspensions are required for extended absences. The process varies significantly based on the reason for the leave.</p>
+                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="suspension-card bg-white rounded-lg shadow-md p-6 border border-slate-200 text-center">
+                                <h4 class="font-bold text-xl text-amber-600">RTWO</h4>
+                                <div class="suspension-details">
+                                    <p class="text-sm font-semibold text-slate-500 mb-2">3 Unauthorized Absences</p>
+                                    <p><span class="font-semibold">Approver:</span> OM/OD/HR</p>
+                                    <p><span class="font-semibold">Requirement:</span> NOD & Projected Attrition date. Ticket due by Thursday, 10:00 PM MNL.</p>
+                                </div>
+                            </div>
+                             <div class="suspension-card bg-white rounded-lg shadow-md p-6 border border-slate-200 text-center">
+                                <h4 class="font-bold text-xl text-amber-600">Medical Leave (MLOA)</h4>
+                                <div class="suspension-details">
+                                    <p class="text-sm font-semibold text-slate-500 mb-2">Validated Medical Certificate</p>
+                                    <p><span class="font-semibold">Approver:</span> OM or OD</p>
+                                    <p><span class="font-semibold">Requirement:</span> Clinic-validated MedCert for min. 3 days.</p>
+                                </div>
+                            </div>
+                             <div class="suspension-card bg-white rounded-lg shadow-md p-6 border border-slate-200 text-center">
+                                <h4 class="font-bold text-xl text-amber-600">Maternity Leave</h4>
+                                <div class="suspension-details">
+                                    <p class="text-sm font-semibold text-slate-500 mb-2">Maternity</p>
+                                    <p><span class="font-semibold">Approver:</span> OM/OD/HR</p>
+                                    <p><span class="font-semibold">Requirement:</span> MedCert with HR approval & completed forms.</p>
+                                </div>
+                            </div>
+                            <div class="suspension-card bg-white rounded-lg shadow-md p-6 border border-slate-200 text-center">
+                                <h4 class="font-bold text-xl text-amber-600">Paternity Leave</h4>
+                                <div class="suspension-details">
+                                    <p class="text-sm font-semibold text-slate-500 mb-2">Married Employees Only</p>
+                                    <p><span class="font-semibold">Approver:</span> OM/OD/HR</p>
+                                    <p><span class="font-semibold">Requirement:</span> Supporting documents provided to HR.</p>
+                                </div>
+                            </div>
+                            <div class="suspension-card bg-white rounded-lg shadow-md p-6 border border-slate-200 text-center">
+                                <h4 class="font-bold text-xl text-amber-600">Termination</h4>
+                                <div class="suspension-details">
+                                    <p class="text-sm font-semibold text-slate-500 mb-2">Attrition/Resignation</p>
+                                    <p><span class="font-semibold">Approver:</span> OM/OD/HR</p>
+                                    <p><span class="font-semibold">Requirement:</span> HR acknowledgement and SOM/OD sign-off.</p>
+                                </div>
+                            </div>
+                             <div class="suspension-card bg-white rounded-lg shadow-md p-6 border border-slate-200 text-center">
+                                <h4 class="font-bold text-xl text-amber-600">Solo-Parent Leave</h4>
+                                <div class="suspension-details">
+                                    <p class="text-sm font-semibold text-slate-500 mb-2">DSWD ID Required</p>
+                                    <p><span class="font-semibold">Approver:</span> OM/OD/HR</p>
+                                    <p><span class="font-semibold">Requirement:</span> Prior HR approval and official Solo Parent ID.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-center mt-6">
+                            <div class="suspension-card bg-white rounded-lg shadow-md p-6 border border-slate-200 text-center w-full max-w-xs">
+                               <h4 class="font-bold text-xl text-amber-600">Bereavement Leave</h4>
+                                <div class="suspension-details">
+                                    <p class="text-sm font-semibold text-slate-500 mb-2">Immediate Family Only</p>
+                                    <p><span class="font-semibold">Approver:</span> OM/OD/HR</p>
+                                    <p><span class="font-semibold">Requirement:</span> Documents provided to HR (regular employees).</p>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="mt-8 bg-red-100 border-l-4 border-red-500 text-red-800 p-4 rounded-lg">
+                            <h4 class="font-bold">Critical Note on Ticket Processing</h4>
+                            <p>Suspension tickets will be rejected if required approvals (OM/OD/HR) are missing, necessary documents like medical certificates are not attached, or the submission is past the deadline.</p>
                         </div>
                     </div>
                 </section>
-
-                <!-- Tools & Resources -->
                 <section id="tools" class="mb-20">
-                     <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Tools & Resources</h2>
-                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
-                         <!-- MCD Dashboard -->
-                         <a href="https://lookerstudio.google.com/u/0/reporting/620dc5bd-6bf7-4cca-8568-327bb0c797af/page/p_w6250fc6pc" target="_blank" rel="noopener noreferrer" class="group bg-white p-6 rounded-lg shadow-lg border border-slate-200 hover:border-amber-400 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center">
-                             <i data-lucide="layout-dashboard" class="w-10 h-10 text-amber-500 mb-4 transition-transform duration-300 group-hover:scale-110"></i>
-                             <h3 class="text-xl font-bold text-amber-600">MCD Dashboard</h3>
-                         </a>
-                         <!-- WFM HC Tracker -->
-                         <a href="https://docs.google.com/spreadsheets/d/1yHZz2jIQ3yaLF2TxjXuRSPTFfxjIsj0w3NdoJAMFDJc/edit?gid=225015401#gid=225015401" target="_blank" rel="noopener noreferrer" class="group bg-white p-6 rounded-lg shadow-lg border border-slate-200 hover:border-amber-400 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center">
-                             <i data-lucide="users" class="w-10 h-10 text-amber-500 mb-4 transition-transform duration-300 group-hover:scale-110"></i>
-                             <h3 class="text-xl font-bold text-amber-600">WFM HC Tracker</h3>
-                         </a>
-                         <!-- MCD Leave Tracker -->
-                         <a href="https://docs.google.com/spreadsheets/d/1J2kz0YzD9HlteScwChQADSMeZZ_pERmOXrORxeD78fE/edit?gid=450027496#gid=450027496" target="_blank" rel="noopener noreferrer" class="group bg-white p-6 rounded-lg shadow-lg border border-slate-200 hover:border-amber-400 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center sm:col-start-auto lg:col-start-auto sm:col-span-2 lg:col-span-1">
-                             <i data-lucide="clipboard-list" class="w-10 h-10 text-amber-500 mb-4 transition-transform duration-300 group-hover:scale-110"></i>
-                             <h3 class="text-xl font-bold text-amber-600">MCD Leave Tracker</h3>
-                         </a>
-                     </div>
+                    <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Tools & Resources</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                        <a href="https://lookerstudio.google.com/u/0/reporting/620dc5bd-6bf7-4cca-8568-327bb0c797af/page/p_w6250fc6pc" target="_blank" class="group bg-white p-6 rounded-lg shadow-lg border border-slate-200 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                           <div class="w-16 h-16 rounded-full bg-amber-100 mb-4 flex items-center justify-center transition-all duration-300 group-hover:bg-amber-500 group-hover:scale-110"><i data-lucide="layout-dashboard" class="w-8 h-8 text-amber-600 transition-all duration-300 group-hover:text-white"></i></div>
+                           <h3 class="text-lg font-bold text-slate-800">MCD Dashboard</h3>
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/1yHZz2jIQ3yaLF2TxjXuRSPTFfxjIsj0w3NdoJAMFDJc/edit?gid=225015401#gid=225015401" target="_blank" class="group bg-white p-6 rounded-lg shadow-lg border border-slate-200 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <div class="w-16 h-16 rounded-full bg-amber-100 mb-4 flex items-center justify-center transition-all duration-300 group-hover:bg-amber-500 group-hover:scale-110"><i data-lucide="users-round" class="w-8 h-8 text-amber-600 transition-all duration-300 group-hover:text-white"></i></div>
+                            <h3 class="text-lg font-bold text-slate-800">WFM HC Tracker</h3>
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/1J2kz0YzD9HlteScwChQADSMeZZ_pERmOXrORxeD78fE/edit?gid=450027496#gid=450027496" target="_blank" class="group bg-white p-6 rounded-lg shadow-lg border border-slate-200 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <div class="w-16 h-16 rounded-full bg-amber-100 mb-4 flex items-center justify-center transition-all duration-300 group-hover:bg-amber-500 group-hover:scale-110"><i data-lucide="clipboard-list" class="w-8 h-8 text-amber-600 transition-all duration-300 group-hover:text-white"></i></div>
+                            <h3 class="text-lg font-bold text-slate-800">MCD Leave Tracker</h3>
+                        </a>
+                    </div>
                 </section>
-
-                <!-- Meet the Team -->
                 <section id="team">
                     <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Meet the WFM Team</h2>
-
-                    <!-- Top Row -->
                     <div class="flex flex-wrap justify-center items-stretch gap-8 mb-8">
-                        <!-- Celo Cansino -->
-                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
-                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjW4d5sSiJBCtRFog8CvBuI2SSnvWEMJfCyM9FnYs_9UCCMQ4JVk8A=s240-p-k-rw-no" alt="Photo of Celo Cansino" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
-                            <div class="flex-grow">
-                                <h3 class="text-xl font-bold text-slate-900">Celo Cansino</h3>
-                                <p class="text-amber-600 font-semibold">Senior Director, Workforce</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Tap Cruz -->
-                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
-                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjVIwb3nGzrdP-idqKWRR1klN8wf24ikIbU9hppaMby3iDJzTpj7=s240-p-k-rw-no" alt="Photo of Tap Cruz" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
-                            <div class="flex-grow">
-                                <h3 class="text-xl font-bold text-slate-900">Tap Cruz</h3>
-                                <p class="text-amber-600 font-semibold">Senior Manager, Workforce</p>
-                            </div>
-                        </div>
-
-                        <!-- Marvin Abello -->
-                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
-                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjVXI65029zpsAH6LQp82kwN1WH9UQ4Fnc_lkrJ7bL4Nu7e0rbbT=s240-p-k-rw-no" alt="Photo of Marvin Abello" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
-                             <div class="flex-grow">
-                                <h3 class="text-xl font-bold text-slate-900">Marvin Abello</h3>
-                                <p class="text-amber-600 font-semibold">Manager, Workforce</p>
-                            </div>
-                        </div>
+                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col"><img src="https://lh3.googleusercontent.com/a-/ALV-UjW4d5sSiJBCtRFog8CvBuI2SSnvWEMJfCyM9FnYs_9UCCMQ4JVk8A=s240-p-k-rw-no" alt="Photo of Celo Cansino" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-slate-200"><div><h3 class="text-xl font-bold text-slate-900">Celo Cansino</h3><p class="text-amber-600 font-semibold">Senior Director, Workforce</p></div></div>
+                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col"><img src="https://lh3.googleusercontent.com/a-/ALV-UjVIwb3nGzrdP-idqKWRR1klN8wf24ikIbU9hppaMby3iDJzTpj7=s240-p-k-rw-no" alt="Photo of Tap Cruz" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-slate-200"><div><h3 class="text-xl font-bold text-slate-900">Tap Cruz</h3><p class="text-amber-600 font-semibold">Senior Manager, Workforce</p></div></div>
+                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col"><img src="https://lh3.googleusercontent.com/a-/ALV-UjVXI65029zpsAH6LQp82kwN1WH9UQ4Fnc_lkrJ7bL4Nu7e0rbbT=s240-p-k-rw-no" alt="Photo of Marvin Abello" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-slate-200"><div><h3 class="text-xl font-bold text-slate-900">Marvin Abello</h3><p class="text-amber-600 font-semibold">Manager, Workforce</p></div></div>
                     </div>
-
-                    <!-- Bottom Row -->
-                    <div class="flex flex-wrap justify-center items-stretch gap-8">
-                        <!-- Joshua Bonife -->
-                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
-                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjWwga5bC9WnPTLi0qsAT_K1WopFD_X5K7UxCnGv8MsK39Eb_C0=s240-p-k-rw-no" alt="Photo of Joshua Bonife" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
-                            <div class="flex-grow">
-                                <h3 class="text-xl font-bold text-slate-900">Joshua Bonife</h3>
-                                <p class="text-amber-600 font-semibold">Capacity Planner, Workforce</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Paul John Guevarra -->
-                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col">
-                            <img src="https://lh3.googleusercontent.com/a-/ALV-UjVRUXnz2Hgh1RnpYJJ4cacMgEZNTVidgoT9PJu2Yc4aNpBzOnzlkVq40yuaEoXc4P7B_lNZrhRxJQ4AIzF8bWmAa8gmI7zxXu9sKfj1MxmD5zpu5fO0XI35-JYlNeN9rWhE7IHh1KaMZ3ziAiv4Zia4r92hn_yPAbabs72PwydD6amskzDJttucQ5Boe8eSVRI2EQSPzt2A25M6F3M8I--Gk3TY9I_4yJ-njvvq98fbhyrGWYSvX62i-QA9K6EzhH1g0bbx5qbEah6LkfoZH1O3Vz0QXgOVyYDuMF0d_H6Dn-iT4RTTMbNwobN7RJiBgYTohnXECJ6e4l_AMJIQfwYlE8WPdc_cOM4Xmqtq0n6tpxt7WdeddHQq_f0MWcCSBzLLcQYUI5AzFxhi_yRrxVrxOukZrRhau5zfRucd8Yi8oCMiicMS892TqiO1PYwcahE8wD57Ulw9OrVogAl1NjC46vlaBw8TFONvGvAnMwCPESA_aps6yMPgkC2uQrbE_uSNxZnxTDKQmViLaXOqu1Ll4RJD8oW7sAPZy5mkNte2-HS2EsyfIwWod9gC0haJvLWN7f9rLt7WstjvnM4Wu_iGAI0AF-q-gbTzGqYVxKnHIPIpWsStLD36A6xiwX_SL1TRMm7QhcWdf21Ja4Mb5PrNJUPchgDJYskTHqt9Cqju2VxJgAxSKgWpeA-TsZ0TbC4-30QFrUcDzCmbaMsdqzp4SOkMXOrLg8SIGRsECtVLUwINDJR-CoKBAkIzd36B3XJIS8wGZsIPj8CVQLclSfTVzUi6I1lYSCejh8iIVfJDtxB2tc5z-u0D8Q2C9WzBx5AuEaB4k-c-vgjBaY-9jbO5MIKCX4fh1VmITnu5hujuL3JJPrA24b7M1Pbz-97MnOQycazgQLgUcKlB9vKwiUWwKWbAF9eU9QIffeRHqfC4w59f9mpTEPovvd7rHtWKjiFMqyWBs7Bsv_4ka2JVtHDHbnc2CrWyag=s240-p-k-rw-no" alt="Photo of Paul John Guevarra" class="w-32 h-32 rounded-full mx-auto mb-4 flex-shrink-0 object-cover border-4 border-slate-200">
-                             <div class="flex-grow">
-                                <h3 class="text-xl font-bold text-slate-900">Paul John Guevarra</h3>
-                                <p class="text-amber-600 font-semibold">Scheduling Specialist, Workforce</p>
-                            </div>
-                        </div>
+                     <div class="flex flex-wrap justify-center items-stretch gap-8">
+                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col"><img src="https://lh3.googleusercontent.com/a-/ALV-UjWwga5bC9WnPTLi0qsAT_K1WopFD_X5K7UxCnGv8MsK39Eb_C0=s240-p-k-rw-no" alt="Photo of Joshua Bonife" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-slate-200"><div><h3 class="text-xl font-bold text-slate-900">Joshua Bonife</h3><p class="text-amber-600 font-semibold">Capacity Planner, Workforce</p></div></div>
+                        <div class="bg-white p-8 rounded-lg shadow-lg border border-slate-200 text-center w-full max-w-xs flex flex-col"><img src="https://lh3.googleusercontent.com/a-/ALV-UjVRUXnz2Hgh1RnpYJJ4cacMgEZNTVidgoT9PJu2Yc4aNpBzOnzlkVq40yuaEoXc4P7B_lNZrhRxJQ4AIzF8bWmAa8gmI7zxXu9sKfj1MxmD5zpu5fO0XI35-JYlNeN9rWhE7IHh1KaMZ3ziAiv4Zia4r92hn_yPAbabs72PwydD6amskzDJttucQ5Boe8eSVRI2EQSPzt2A25M6F3M8I--Gk3TY9I_4yJ-njvvq98fbhyrGWYSvX62i-QA9K6EzhH1g0bbx5qbEah6LkfoZH1O3Vz0QXgOVyYDuMF0d_H6Dn-iT4RTTMbNwobN7RJiBgYTohnXECJ6e4l_AMJIQfwYlE8WPdc_cOM4Xmqtq0n6tpxt7WdeddHQq_f0MWcCSBzLLcQYUI5AzFxhi_yRrxVrxOukZrRhau5zfRucd8Yi8oCMiicMS892TqiO1PYwcahE8wD57Ulw9OrVogAl1NjC46vlaBw8TFONvGvAnMwCPESA_aps6yMPgkC2uQrbE_uSNxZnxTDKQmViLaXOqu1Ll4RJD8oW7sAPZy5mkNte2-HS2EsyfIwWod9gC0haJvLWN7f9rLt7WstjvnM4Wu_iGAI0AF-q-gbTzGqYVxKnHIPIpWsStLD36A6xiwX_SL1TRMm7QhcWdf21Ja4Mb5PrNJUPchgDJYskTHqt9Cqju2VxJgAxSKgWpeA-TsZ0TbC4-30QFrUcDzCmbaMsdqzp4SOkMXOrLg8SIGRsECtVLUwINDJR-CoKBAkIzd36B3XJIS8wGZsIPj8CVQLclSfTVzUi6I1lYSCejh8iIVfJDtxB2tc5z-u0D8Q2C9WzBx5AuEaB4k-c-vgjBaY-9jbO5MIKCX4fh1VmITnu5hujuL3JJPrA24b7M1Pbz-97MnOQycazgQLgUcKlB9vKwiUWwKWbAF9eU9QIffeRHqfC4w59f9mpTEPovvd7rHtWKjiFMqyWBs7Bsv_4ka2JVtHDHbnc2CrWyag=s240-p-k-rw-no" alt="Photo of Paul John Guevarra" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-slate-200"><div><h3 class="text-xl font-bold text-slate-900">Paul John Guevarra</h3><p class="text-amber-600 font-semibold">Scheduling Specialist, Workforce</p></div></div>
                     </div>
                 </section>
-
-                <footer class="mt-20 text-center text-slate-500 text-sm">
-                    <p>INTOUCHCX 2025. ALL RIGHTS RESERVED</p>
-                </footer>
+                <footer class="mt-20 text-center text-slate-500 text-sm"><p>INTOUCHCX 2025. ALL RIGHTS RESERVED</p></footer>
             </div>
         </main>
     </div>
-    
-    <!-- Daily Flow Modal -->
     <div id="daily-flow-modal" class="fixed inset-0 bg-black bg-opacity-60 items-center justify-center p-4 hidden z-50">
         <div class="bg-white rounded-lg shadow-2xl max-w-2xl w-full relative transform transition-all duration-300 scale-95 opacity-0">
-            <div id="modal-header" class="p-5 flex items-center justify-between border-b-4">
-                <h3 id="modal-title" class="text-2xl font-semibold text-white"></h3>
-                <button type="button" id="close-modal-btn" class="text-white bg-transparent hover:bg-white/20 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center">
-                    <i data-lucide="x" class="w-5 h-5"></i><span class="sr-only">Close modal</span>
-                </button>
-            </div>
+            <div id="modal-header" class="p-5 flex items-center justify-between border-b-4"><h3 id="modal-title" class="text-2xl font-semibold text-white"></h3><button type="button" id="close-modal-btn" class="text-white bg-transparent hover:bg-white/20 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center"><i data-lucide="x" class="w-5 h-5"></i><span class="sr-only">Close modal</span></button></div>
             <div id="modal-body" class="p-6 space-y-4 text-lg leading-relaxed text-slate-600"></div>
         </div>
     </div>
-
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Process Section Logic
-            const processData = {
-                "Scheduling": {
-                    "Scheduling Process": { description: "This process outlines the end-to-end procedure for creating, finalizing, and publishing agent schedules.", icon: "calendar-days" },
-                    "Schedule Change / Swap Process": { description: "This defines the protocol for agents to request a change to their schedule or to swap shifts with a colleague.", icon: "arrow-right-left" },
-                    "Offline Activity Plotting": { description: "This process details how to properly schedule non-phone activities such as training, coaching, and meetings.", icon: "clipboard-pen-line" },
-                    "Leave Request": { description: "The procedure for submitting, approving, and tracking all types of leave (e.g., vacation, sick, personal).", icon: "plane" },
-                    "Schedule Suspension": { description: "This protocol is enacted during unforeseen circumstances, such as system outages or emergencies.", icon: "pause-circle" }
-                },
-                "Real Time Management": {
-                    "Queue Management": { description: "Real-time monitoring of incoming contact queues to make intra-day adjustments.", icon: "users" },
-                    "AHOD Process": { description: "A critical response process initiated during unexpectedly high call volumes or staff shortages.", icon: "siren" },
-                    "Aux Codes": { description: "A comprehensive guide to the proper usage of Aux codes, which represent specific non-productive states.", icon: "tags" },
-                    "Real Time Request": { description: "This covers the system for agents to make immediate requests, such as for an unscheduled break.", icon: "send" },
-                    "Adherence": { description: "Schedule Adherence measures how well an agent sticks to their scheduled activities.", icon: "target" },
-                    "Attendance": { description: "This policy details the company's expectations regarding punctuality and attendance.", icon: "user-check" },
-                    "Outage Process": { description: "A step-by-step procedure to be followed during a technical outage.", icon: "server-crash" },
-                    "RTA Violation": { description: "Defines what constitutes a Real-Time Adherence (RTA) violation and the process for addressing them.", icon: "shield-alert" }
-                }
-            };
-            const processListContainer = document.getElementById('process-list');
-            const processContentContainer = document.getElementById('process-content');
-            const renderProcesses = () => {
-                const categoryIcons = { "Scheduling": "calendar-clock", "Real Time Management": "history" };
-                let html = '';
-                for (const category in processData) {
-                    html += `<div class="flex items-center gap-3 p-4 bg-slate-100 border-b border-slate-200"><i data-lucide="${categoryIcons[category]}" class="w-5 h-5 text-amber-600"></i><h3 class="text-lg font-bold text-slate-800">${category}</h3></div>`;
-                    for (const item in processData[category]) {
-                         html += `<div class="process-item cursor-pointer p-4 border-b border-slate-200 text-slate-600 font-medium" data-category="${category}" data-item="${item}">${item}</div>`;
-                    }
-                }
-                processListContainer.innerHTML = html;
-            };
-            const renderContent = (category, item) => {
-                const { description, icon } = processData[category][item];
-                processContentContainer.innerHTML = `<div class="text-center"><div class="w-16 h-16 rounded-full bg-amber-100 mx-auto mb-6 flex items-center justify-center"><i data-lucide="${icon}" class="w-8 h-8 text-amber-500"></i></div><h3 class="text-2xl font-bold text-slate-900 mb-2">${item}</h3><p class="text-lg text-slate-600">${description}</p></div>`;
-                lucide.createIcons();
-            };
-            processListContainer.addEventListener('click', (e) => {
-                if (e.target.classList.contains('process-item')) {
-                    const allItems = processListContainer.querySelectorAll('.process-item');
-                    allItems.forEach(el => el.classList.remove('active-process'));
-                    e.target.classList.add('active-process');
-                    renderContent(e.target.dataset.category, e.target.dataset.item);
-                }
-            });
-
-            // Daily Flow Logic
-            const dailyFlowContainer = document.getElementById('daily-flow-container');
-            const dailyFlowModal = document.getElementById('daily-flow-modal');
-            const modalContent = dailyFlowModal.querySelector('div');
-            const modalHeader = document.getElementById('modal-header');
-            const modalTitle = document.getElementById('modal-title');
-            const modalBody = document.getElementById('modal-body');
-            const closeModalBtn = document.getElementById('close-modal-btn');
-            const dailyFlowData = {
-                monday: { title: "Monday", color: "bg-amber-400", task: "Leading the headcount reconciliation for all programs", details: "<strong>Task:</strong> Cross-check the headcount listed in the official workforce roster file against the actual headcount reported by operations.<br><strong>Objective:</strong> Identify and resolve any discrepancies immediately to ensure accurate staffing records for the week." },
-                tuesday: { title: "Tuesday", color: "bg-red-400", task: "Plotting of PTOs for the following week & Updating of Capacity Files", details: "<strong>Objective:</strong> Approve and schedule employee leave requests for the upcoming week without impacting operational coverage. Update capacity files with the latest staffing and forecast information." },
-                wednesday: { title: "Wednesday", color: "bg-amber-400", task: "Creating schedules for the following week. Capacity call discussion for all programs.", details: "<strong>Schedule Creation:</strong> Generate employee schedules based on forecast models. <br><strong>Capacity Call:</strong> A key meeting with operations leaders to discuss staffing levels, identify potential gaps, and strategize solutions." },
-                thursday: { title: "Thursday", color: "bg-red-400", task: "Publishing of schedules and making changes if there are any.", details: "<strong>Objective:</strong> To provide employees with their finalized schedules in a timely manner.<br><strong>Process:</strong> The finalized schedule is uploaded to the workforce management portal." },
-                friday: { title: "Friday", color: "bg-amber-400", task: "Weekly client sync", details: "<strong>Objective:</strong> Review the previous week's performance metrics, discuss the upcoming week's staffing plan, and address any client concerns." },
-            };
-            const renderDailyFlow = () => {
-                dailyFlowContainer.innerHTML = Object.entries(dailyFlowData).map(([day, data]) => `
-                    <div id="${day}" class="daily-flow-card flex flex-col cursor-pointer border-r border-slate-200 last:border-r-0">
-                        <div class="p-6 h-48 flex items-center justify-center">
-                             <div class="w-24 h-24 rounded-full border-4 flex justify-center items-center ${day === 'tuesday' || day === 'thursday' ? 'border-red-400' : 'border-amber-400'}">
-                                <i data-lucide="users" class="w-12 h-12 ${day === 'tuesday' || day === 'thursday' ? 'text-red-400' : 'text-amber-400'}"></i>
+            const processData={"Scheduling":{"Scheduling Process":{description:`
+                        <div class="text-left space-y-6">
+                            <!-- WFM Team -->
+                            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="database" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">1. WFM Team: The Foundation</h4>
+                                </div>
+                                <ul class="space-y-2 list-disc list-inside ml-4 text-slate-700">
+                                    <li>Plots all agent schedules one week in advance using <strong>IEX</strong>.</li>
+                                    <li>Notifies Team Leads as soon as the weekly schedule is published.</li>
+                                    <li>Tracks schedule adherence and reports on any outliers for visibility.</li>
+                                    <li>Manages and validates all PTO and Schedule Change requests according to deadlines.</li>
+                                </ul>
+                            </div>
+                            <!-- Arrow Down -->
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <!-- Team Lead -->
+                            <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="users" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">2. Team Lead: The Communication Hub</h4>
+                                </div>
+                                <ul class="space-y-2 list-disc list-inside ml-4 text-slate-700">
+                                    <li>Monitors their team's schedule weekly and clearly communicates all updates to agents.</li>
+                                    <li>Promptly notifies WFM of any corrections needed after the schedule is released.</li>
+                                    <li>Submits all swap/change requests via email or ticket at least <strong>2 weeks</strong> in advance.</li>
+                                    <li>Informs the Real-Time Analyst (RTA) <strong>30 minutes prior</strong> to any ad-hoc offline activities.</li>
+                                </ul>
+                            </div>
+                            <!-- Arrow Down -->
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <!-- Agent -->
+                            <div class="p-4 rounded-lg border-2 border-red-200 bg-red-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="user-check" class="w-6 h-6 text-red-700"></i>
+                                    <h4 class="font-bold text-xl text-red-800">3. Agent: Execution & Adherence</h4>
+                                </div>
+                                <ul class="space-y-2 list-disc list-inside ml-4 text-slate-700">
+                                    <li>Checks their schedule weekly with their Team Lead to stay informed.</li>
+                                    <li>Adheres strictly to the plotted schedules in <strong>IEX</strong>.</li>
+                                    <li>Immediately notifies their Team Lead of the reason for any deviation from the schedule (e.g., extended calls, system issues).</li>
+                                </ul>
+                            </div>
+                        </div>`,icon:"calendar-days"},"Capacity Planning":{description:`
+                         <div class="text-left space-y-6">
+                            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="database-zap" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">1. We Collect Inputs and Assumptions</h4>
+                                </div>
+                                <p class="text-slate-700 mb-2">The foundation of our plan. We gather critical data including:</p>
+                                <ul class="space-y-2 list-disc list-inside ml-4 text-slate-700">
+                                    <li><strong>Project & Ramp Plans:</strong> To understand growth or seasonal changes.</li>
+                                    <li><strong>Historical Data:</strong> We analyze past trends in volume and AHT.</li>
+                                    <li><strong>Business Updates:</strong> We account for upcoming holidays, marketing events, and potential system downtime.</li>
+                                </ul>
+                            </div>
+                             <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="calculator" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">2. We Calculate Staffing Requirements</h4>
+                                </div>
+                                <p class="text-slate-700">Using the collected data, we determine our baseline staffing needs. Our primary method is using an <strong>Erlang C</strong> model to ensure we meet our service level targets based on the forecasted workload.</p>
+                            </div>
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-red-200 bg-red-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="user-check" class="w-6 h-6 text-red-700"></i>
+                                    <h4 class="font-bold text-xl text-red-800">3. We Verify Staffing Projections</h4>
+                                </div>
+                                <p class="text-slate-700 mb-2">We check our initial projections against reality and optimize where needed. This includes:</p>
+                                 <ul class="space-y-2 list-disc list-inside ml-4 text-slate-700">
+                                    <li>Proposing a <strong>Hiring Plan</strong> to Talent Acquisition if we foresee a staffing gap.</li>
+                                    <li>Optimizing current staff through strategic OT/VTO offers or cross-skilling initiatives.</li>
+                                </ul>
+                            </div>
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="presentation" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">4. We Present the Capacity Plan</h4>
+                                </div>
+                                <p class="text-slate-700">We present our findings, recommendations, and assumptions to all key stakeholders, including Operations and the client, to get their feedback and formal sign-off.</p>
+                            </div>
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-green-200 bg-green-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="send" class="w-6 h-6 text-green-700"></i>
+                                    <h4 class="font-bold text-xl text-green-800">5. We Publish the Plan</h4>
+                                </div>
+                                <p class="text-slate-700">Once approved, we publish the official Capacity Plan for a locked period and notify all stakeholders of any critical dates or impacts. This plan becomes the blueprint for our scheduling team.</p>
+                            </div>
+                             <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="refresh-cw" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">6. We Manage Change</h4>
+                                </div>
+                                <p class="text-slate-700">The business environment is dynamic. We have a process to handle revision requests from stakeholders and proactively make adjustments as needed, maintaining a clear version control log for all changes.</p>
                             </div>
                         </div>
-                        <div class="${data.color} w-full p-3 text-center text-white font-bold text-lg">${data.title}</div>
-                        <div class="p-6 text-center text-slate-600 flex-grow flex items-center justify-center">${data.task}</div>
-                    </div>
-                `).join('');
-            };
-            const openModal = (day) => {
-                const data = dailyFlowData[day];
-                modalTitle.textContent = `${data.title}: Key Activities`;
-                modalBody.innerHTML = data.details;
-                modalHeader.className = `p-5 flex items-center justify-between border-b-4 ${data.color}`;
-                dailyFlowModal.classList.remove('hidden'); dailyFlowModal.classList.add('flex');
-                setTimeout(() => { modalContent.classList.remove('scale-95', 'opacity-0'); modalContent.classList.add('scale-100', 'opacity-100'); }, 10);
-                lucide.createIcons();
-            };
-            const closeModal = () => {
-                modalContent.classList.add('scale-95', 'opacity-0');
-                setTimeout(() => { dailyFlowModal.classList.add('hidden'); dailyFlowModal.classList.remove('flex'); }, 300);
-            };
-            dailyFlowContainer.addEventListener('click', (e) => { const card = e.target.closest('.daily-flow-card'); if (card) { openModal(card.id); } });
-            closeModalBtn.addEventListener('click', closeModal);
-            dailyFlowModal.addEventListener('click', (e) => { if (e.target === dailyFlowModal) { closeModal(); } });
-            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !dailyFlowModal.classList.contains('hidden')) { closeModal(); } });
-            
-            // Chart.js Logic
-            const rolesCtx = document.getElementById('rolesChart').getContext('2d');
-            new Chart(rolesCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Agents', 'Team Leads', 'WFM Team'],
-                    datasets: [{
-                        label: 'Responsibilities',
-                        data: [40, 35, 25],
-                        backgroundColor: ['#b45309', '#d97706', '#f59e0b'], // amber-800, amber-600, amber-400
-                        borderColor: '#f8fafc',
-                        borderWidth: 4, hoverOffset: 8
-                    }]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, tooltip: { callbacks: { title: (tooltipItems) => tooltipItems[0].label } } },
-                    cutout: '70%'
-                }
-            });
-
-            // Initial Render
-            renderProcesses(); 
-            renderDailyFlow(); 
-            lucide.createIcons();
-            processListContainer.querySelector('.process-item').click();
-            
-            // Nav Highlighting Logic
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('#sidebar-nav a');
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.4
-            };
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const id = entry.target.getAttribute('id');
-                        navLinks.forEach(link => {
-                            link.classList.remove('active-nav-link');
-                            if (link.getAttribute('href') === `#${id}`) {
-                                link.classList.add('active-nav-link');
-                            }
-                        });
-                    }
-                });
-            }, observerOptions);
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+                    `,icon:"bar-chart-big"},"Schedule Change / Swap Process":{description:`
+                        <div class="text-left space-y-6">
+                            <!-- Agent -->
+                            <div class="p-4 rounded-lg border-2 border-red-200 bg-red-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="user" class="w-6 h-6 text-red-700"></i>
+                                    <h4 class="font-bold text-xl text-red-800">1. Agent: Initiates Request</h4>
+                                </div>
+                                <p class="text-slate-700">The agent sends a formal <strong>Schedule Swap</strong> or <strong>Schedule Change</strong> request to their Team Lead. This must be done at least <strong>2 weeks</strong> prior to the desired date.</p>
+                            </div>
+                             <!-- Arrow Down -->
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <!-- Team Lead -->
+                            <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="users" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">2. Team Lead: Reviews & Forwards</h4>
+                                </div>
+                                <p class="text-slate-700">The Team Lead reviews the request. If it is a swap, they check for possible partners. The TL then forwards the official request to the WFM Team for analysis.</p>
+                            </div>
+                            <!-- Arrow Down -->
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <!-- WFM Team -->
+                            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="database" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">3. WFM Team: Final Decision</h4>
+                                </div>
+                                <p class="text-slate-700 mb-4">The WFM team checks staffing levels and overall impact to determine if the request can be accommodated.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="p-3 rounded-lg bg-green-100 border border-green-300">
+                                        <h5 class="font-bold text-green-800 flex items-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i>Approved</h5>
+                                        <p class="text-sm text-green-700 mt-1">If approved, WFM plots the new schedule in <strong>IEX</strong> and the process is complete.</p>
+                                    </div>
+                                    <div class="p-3 rounded-lg bg-red-100 border border-red-300">
+                                        <h5 class="font-bold text-red-800 flex items-center gap-2"><i data-lucide="x-circle" class="w-5 h-5"></i>Not Approved</h5>
+                                        <p class="text-sm text-red-700 mt-1">If not approved, WFM informs the Team Lead of the staffing variance or reason for denial.</p>
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- Guidelines -->
+                            <div class="mt-6 pt-6 border-t border-slate-200">
+                                <h4 class="font-bold text-xl text-slate-800 text-center mb-4">Key Guidelines & Email Format</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h5 class="font-semibold text-slate-700 mb-2">Important Rules:</h5>
+                                        <ul class="space-y-2 list-disc list-inside text-slate-600">
+                                            <li>Agents involved in a swap must have the <strong>same skill set</strong>.</li>
+                                            <li>Swapping of Break/Lunch is not permitted unless for a documented medical reason.</li>
+                                            <li>The email subject line must be: <code class="bg-slate-200 text-sm p-1 rounded">McDonald's SWAP/SCHEDULE Request</code></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-slate-700 mb-2">Required Email Format:</h5>
+                                        <div class="text-xs border rounded-lg p-2 bg-white">
+                                            <p class="font-bold mb-1">Existing Schedule:</p>
+                                            <table class="w-full text-center">
+                                                <thead class="bg-slate-100"><tr><th class="p-1">EID</th><th class="p-1">Name</th><th class="p-1">Shift</th></tr></thead>
+                                                <tbody><tr><td>123455</td><td>Agent A</td><td>9AM-6PM</td></tr><tr><td>123456</td><td>Agent B</td><td>11AM-8PM</td></tr></tbody>
+                                            </table>
+                                            <p class="font-bold mt-2 mb-1">New Schedule:</p>
+                                            <table class="w-full text-center">
+                                                <thead class="bg-slate-100"><tr><th class="p-1">EID</th><th class="p-1">Name</th><th class="p-1">Shift</th></tr></thead>
+                                                <tbody><tr><td>123455</td><td>Agent A</td><td>11AM-8PM</td></tr><tr><td>123456</td><td>Agent B</td><td>9AM-6PM</td></tr></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`,icon:"arrow-right-left"},"Offline Activity Plotting":{description:`
+                        <div class="text-left space-y-6">
+                            <!-- WFM -->
+                            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="database" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">1. WFM: Plots & Notifies</h4>
+                                </div>
+                                <ul class="space-y-2 list-disc list-inside ml-4 text-slate-700">
+                                    <li>Plots all offline activities (Coaching, Meetings, Training) in <strong>IEX</strong> based on schedule preferences shared by Ops/Client.</li>
+                                    <li>Sends email notifications to Operations once activities are plotted.</li>
+                                    <li>Checks and processes any incoming correction requests from Team Leads.</li>
+                                </ul>
+                            </div>
+                             <!-- Arrow Down -->
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <!-- Team Lead -->
+                            <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="users" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">2. Team Lead: Validates & Communicates</h4>
+                                </div>
+                                <ul class="space-y-2 list-disc list-inside ml-4 text-slate-700">
+                                    <li>Validates the plotted offline activities for their team in <strong>IEX</strong>.</li>
+                                    <li><strong>If a correction is needed,</strong> the Team Lead sends a formal offline activity plotting request to WFM.</li>
+                                    <li><strong>If no correction is needed,</strong> the Team Lead informs their team that the activities are final.</li>
+                                </ul>
+                            </div>
+                             <!-- Arrow Down -->
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <!-- Agent -->
+                            <div class="p-4 rounded-lg border-2 border-red-200 bg-red-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="user-check" class="w-6 h-6 text-red-700"></i>
+                                    <h4 class="font-bold text-xl text-red-800">3. Agent: Final Validation</h4>
+                                </div>
+                                 <ul class="space-y-2 list-disc list-inside ml-4 text-slate-700">
+                                    <li>Validates their own plotted offline activities in <strong>IEX</strong>.</li>
+                                    <li><strong>If any discrepancy is found,</strong> the agent must immediately inform their Team Lead.</li>
+                                     <li><strong>If everything is correct,</strong> the process is complete.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        `,icon:"clipboard-pen-line"},"Leave Request":{description:`
+                        <div class="text-left space-y-6">
+                            <!-- Agent -->
+                            <div class="p-4 rounded-lg border-2 border-red-200 bg-red-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="user" class="w-6 h-6 text-red-700"></i>
+                                    <h4 class="font-bold text-xl text-red-800">1. Agent Informs Team Lead</h4>
+                                </div>
+                                <p class="text-slate-700">The agent verbally informs their Team Lead of their intention to file for Paid Time Off.</p>
+                            </div>
+                             <!-- Arrow Down -->
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <!-- Team Lead -->
+                            <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="clipboard-list" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">2. Team Lead Adds to Tracker</h4>
+                                </div>
+                                <p class="text-slate-700">The Team Lead adds the agent's request to their official PTO tracker for documentation.</p>
+                            </div>
+                             <!-- Arrow Down -->
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <!-- OM Approval -->
+                             <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="user-check" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">3. Operations Manager Approves</h4>
+                                </div>
+                                <p class="text-slate-700">The tracker is reviewed by the Operations Manager, <strong class="font-medium">Miles</strong>, who provides the final approval for all PTO requests.</p>
+                            </div>
+                             <!-- Arrow Down -->
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <!-- WFM Plotting -->
+                            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="calendar-plus" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">4. WFM Plots Approved Leaves</h4>
+                                </div>
+                                <p class="text-slate-700">Every week, our WFM team plots all approved leaves in <strong>IEX</strong> before the end of the Thursday shift, ensuring the master schedule is accurate.</p>
+                            </div>
+                        </div>`,icon:"plane"},"Schedule Suspension":{description:`
+                        <div class="text-left space-y-6">
+                            <!-- Team Lead -->
+                            <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="users" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">1. Team Lead: Initiates Suspension Request</h4>
+                                </div>
+                                <p class="text-slate-700 mb-4">The Team Lead files a <strong>JIRA ticket</strong> and sends an email to formally request a schedule suspension. The ticket must include:</p>
+                                <ul class="space-y-2 list-disc list-inside ml-4 text-slate-700 font-medium">
+                                    <li>Formal approval from the SOM/OD/HR.</li>
+                                    <li>A Medical Certificate or other necessary supporting documents attached.</li>
+                                </ul>
+                            </div>
+                             <!-- Arrow Down -->
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <!-- WFM Team -->
+                            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="database" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">2. WFM Team: Validates Submission</h4>
+                                </div>
+                                <p class="text-slate-700">The WFM team reviews the JIRA ticket to check for all required approvals and attached documents to ensure the submission is complete and valid.</p>
+                            </div>
+                             <!-- Arrow Down -->
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <!-- Decision -->
+                             <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="git-pull-request-arrow" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">3. Final Action & System Update</h4>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                    <div class="p-3 rounded-lg bg-green-100 border border-green-300">
+                                        <h5 class="font-bold text-green-800 flex items-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i>Complete & Approved</h5>
+                                        <p class="text-sm text-green-700 mt-1">WFM closes the JIRA ticket with approval notes, processes the Schedule Suspension (SUSP) in <strong>IEX</strong>, and adds an exemption based on the request type.</p>
+                                    </div>
+                                    <div class="p-3 rounded-lg bg-red-100 border border-red-300">
+                                        <h5 class="font-bold text-red-800 flex items-center gap-2"><i data-lucide="x-circle" class="w-5 h-5"></i>Incomplete / Rejected</h5>
+                                        <p class="text-sm text-red-700 mt-1">If incomplete, WFM closes the JIRA ticket and adds notes explaining why the request could not be processed. The process ends.</p>
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- Codes -->
+                            <div class="mt-6 pt-6 border-t border-slate-200">
+                                <h4 class="font-bold text-xl text-slate-800 text-center mb-4">IEX Suspension Codes</h4>
+                                <div class="max-w-md mx-auto bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                                    <div class="flex items-start mb-2">
+                                        <code class="bg-amber-100 text-amber-800 font-bold px-2 py-1 rounded-md text-sm">LOA</code>
+                                        <p class="ml-4 text-slate-600">Used for Medical Leave, Maternity Leave, Solo Parent Leave, and Paternity Leave.</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <code class="bg-red-100 text-red-800 font-bold px-2 py-1 rounded-md text-sm">SUS</code>
+                                        <div class="ml-4 text-slate-600">
+                                            <p>Used for Return to Work Order (RTWO).</p>
+                                            <p class="text-xs italic text-slate-500 mt-1"><strong class="font-semibold">Note:</strong> For RTWO cases, the agent's schedule is retained but tagged accordingly. This allows HR to process termination if no update is received within the RTWO period.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`,icon:"pause-circle"}},"Real Time Management":{"Queue Management":{description:`
+                        <div class="text-left space-y-6">
+                            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="tv" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">1. We Constantly Monitor the Queues</h4>
+                                </div>
+                                <p class="text-slate-700">As RTAs, our primary tool is the real-time dashboard in <strong>Amazon Connect</strong>. We keep a constant watch on key metrics like Service Level, Answer Rate, Average Speed of Answer (ASA), and agent availability.</p>
+                            </div>
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="search" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">2. We Identify and Investigate Variances</h4>
+                                </div>
+                                <p class="text-slate-700">When we see a metric turning red—like a dropping Service Level—we immediately investigate the cause. Is it a sudden spike in calls? Is AHT higher than planned? Are agents not adhering to their <strong>IEX</strong> schedule? We find the root cause.</p>
+                            </div>
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-red-200 bg-red-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="sliders-horizontal" class="w-6 h-6 text-red-700"></i>
+                                    <h4 class="font-bold text-xl text-red-800">3. We Make Real-Time Adjustments</h4>
+                                </div>
+                                <p class="text-slate-700 mb-2">Based on our findings, we take immediate action to stabilize the queue. Our options include:</p>
+                                <ul class="space-y-2 list-disc list-inside ml-4 text-slate-700">
+                                    <li>Pulling agents from their scheduled offline tasks (like training or coaching).</li>
+                                    <li>Requesting Overtime (OT) from agents ending their shifts.</li>
+                                    <li>Offering Voluntary Time Off (VTO) if we are overstaffed.</li>
+                                    <li>Coordinating directly with Team Leads to address any agent adherence issues.</li>
+                                </ul>
+                            </div>
+                             <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-green-200 bg-green-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="megaphone" class="w-6 h-6 text-green-700"></i>
+                                    <h4 class="font-bold text-xl text-green-800">4. We Communicate Proactively</h4>
+                                </div>
+                                <p class="text-slate-700">We maintain constant communication with Operations leaders through designated chat channels and regular huddles, providing clear updates on queue status and the actions we are taking to manage them.</p>
+                            </div>
+                        </div>`,icon:"users"},"AHOD Process":{description:`
+                         <div class="text-left space-y-6">
+                            <div class="p-4 rounded-lg border-2 border-red-200 bg-red-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="alert-triangle" class="w-6 h-6 text-red-700"></i>
+                                    <h4 class="font-bold text-xl text-red-800">1. We Identify the Trigger</h4>
+                                </div>
+                                <p class="text-slate-700">We declare an All-Hands-on-Deck (AHOD) situation when our service levels are critically impacted by unexpected events, such as a severe volume spike or high unplanned absenteeism. Our standard trigger is when the Service Level drops below <strong>60% for more than 30 consecutive minutes</strong>.</p>
+                            </div>
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="megaphone" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">2. We Declare the AHOD and Communicate</h4>
+                                </div>
+                                <p class="text-slate-700">We immediately send an urgent broadcast message across all communication channels to every available team member—including Team Leads, support staff, and managers—instructing them to log into the <strong>Amazon Connect</strong> queues to provide support.</p>
+                            </div>
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="list-checks" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">3. We Monitor and Conclude the Event</h4>
+                                </div>
+                                <p class="text-slate-700">We closely monitor the queues until they have returned to stable and manageable levels. Once our service level targets are consistently being met, we send out another broadcast message to officially end the AHOD, allowing everyone to return to their normal duties.</p>
+                            </div>
+                        </div>`,icon:"siren"},"Aux Codes":{description:`
+                        <div class="text-left">
+                            <p class="text-center mb-6">Our proper use of Auxiliary (Aux) codes in <strong>Amazon Connect</strong> is essential for accurate reporting. Our adherence to our <strong>IEX</strong> schedule and our overall productivity are measured based on these codes. Using the wrong code is considered an RTA Violation.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-3 rounded-lg bg-green-100 border border-green-300"><h5 class="font-bold text-green-800">Available</h5><p class="text-sm text-green-700 mt-1">This is your default state when you are ready to take customer calls.</p></div>
+                                <div class="p-3 rounded-lg bg-amber-100 border border-amber-300"><h5 class="font-bold text-amber-800">Break</h5><p class="text-sm text-amber-700 mt-1">Used for your scheduled 15-minute breaks.</p></div>
+                                <div class="p-3 rounded-lg bg-amber-100 border border-amber-300"><h5 class="font-bold text-amber-800">Lunch</h5><p class="text-sm text-amber-700 mt-1">Used for your scheduled 1-hour lunch break.</p></div>
+                                <div class="p-3 rounded-lg bg-slate-200 border border-slate-300"><h5 class="font-bold text-slate-800">Coaching</h5><p class="text-sm text-slate-700 mt-1">Used when you are in a one-on-one session with your Team Lead.</p></div>
+                                <div class="p-3 rounded-lg bg-slate-200 border border-slate-300"><h5 class="font-bold text-slate-800">Meeting</h5><p class="text-sm text-slate-700 mt-1">Used during scheduled team huddles, town halls, or other meetings.</p></div>
+                                <div class="p-3 rounded-lg bg-red-100 border border-red-300"><h5 class="font-bold text-red-800">System Issue</h5><p class="text-sm text-red-700 mt-1">Used only when you are experiencing technical problems. You must notify your TL immediately.</p></div>
+                            </div>
+                        </div>`,icon:"tags"},"Real Time Request":{description:`
+                        <div class="text-left space-y-6">
+                            <div class="p-4 rounded-lg border-2 border-red-200 bg-red-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="user-plus" class="w-6 h-6 text-red-700"></i>
+                                    <h4 class="font-bold text-xl text-red-800">1. Agent Requests Approval from Team Lead</h4>
+                                </div>
+                                <p class="text-slate-700">For any urgent, unscheduled activity (like a bio-break or a request for support), the agent must first get verbal or chat approval from their Team Lead.</p>
+                            </div>
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="message-square-plus" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">2. Team Lead Requests Approval from RTA</h4>
+                                </div>
+                                <p class="text-slate-700">Once the agent is approved internally, the Team Lead sends a formal request message to the RTA in our designated chat channel, stating the agent's name and the reason.</p>
+                            </div>
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="database" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">3. RTA: Final Decision & System Update</h4>
+                                </div>
+                                <p class="text-slate-700 mb-2">We, the RTAs, check the live queue status in <strong>Amazon Connect</strong>. If our service levels are healthy, we approve the request. If not, we may ask the agent to wait. We then make an exception note in our tools to ensure the agent's adherence is not negatively impacted.</p>
+                            </div>
+                        </div>`,icon:"send"},"Adherence":{description:`
+                        <div class="text-left">
+                            <p class="mb-4">Schedule Adherence is a critical KPI that measures how closely our agents follow their plotted schedules in <strong>IEX</strong>. It's how we ensure we have the right number of people available for our customers at all times.</p>
+                             <ul class="space-y-4">
+                                <li class="flex items-start gap-4"><div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0"><i data-lucide="file-clock" class="w-6 h-6 text-amber-600"></i></div><div><h4 class="font-bold text-lg text-slate-800">Minute-by-Minute Measurement</h4><p class="text-slate-600">Our system compares the agent's schedule in <strong>IEX</strong> against their real-time status in <strong>Amazon Connect</strong> for every minute of their shift. There is no grace period; adherence is measured strictly to the plotted time.</p></div></li>
+                                <li class="flex items-start gap-4"><div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0"><i data-lucide="phone-forwarded" class="w-6 h-6 text-amber-600"></i></div><div>
+                                <h4 class="font-bold text-lg text-slate-800">Exception: Delayed Breaks/Lunches Due to Calls</h4>
+                                <p class="text-slate-600">We understand that agents cannot drop a live call. If an ongoing call prevents an agent from taking a break or lunch within 5 minutes of the scheduled start time, the following process applies:</p>
+                                <ol class="list-decimal list-inside mt-2 text-slate-600">
+                                    <li>The agent must notify their Team Lead immediately after the call ends.</li>
+                                    <li>The Team Lead will then notify the RTA.</li>
+                                    <li>We (the RTAs) will then move the break or lunch to the next appropriate time to ensure the agent still receives their full entitlement without negatively impacting their adherence.</li>
+                                </ol>
+                                </div></li>
+                                 <li class="flex items-start gap-4"><div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0"><i data-lucide="trending-up" class="w-6 h-6 text-amber-600"></i></div><div><h4 class="font-bold text-lg text-slate-800">Impact and Reporting</h4><p class="text-slate-600">Low adherence directly impacts our ability to meet service levels. We publish daily adherence reports for Team Leads to review with their agents during coaching sessions to ensure we are always staffed correctly.</p></div></li>
+                            </ul>
+                        </div>`,icon:"target"},"Attendance":{description:`
+                         <div class="text-left space-y-6">
+                            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="database-export" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">1. We Extract & Share Data</h4>
+                                </div>
+                                <p class="text-slate-700">Our process begins each day when we extract the master schedule from <strong>IEX</strong>. We update agent statuses based on initial data (e.g., clocked in on time) and share this attendance file with the Operations team for their validation.</p>
+                            </div>
+                             <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="users" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">2. Operations Validates Status</h4>
+                                </div>
+                                <p class="text-slate-700">The Operations team reviews the file, validating each agent's status. They update it with any changes (e.g., tardiness, confirmed absences) and send the validated file back to our team.</p>
+                            </div>
+                           <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="file-check-2" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">3. We Finalize & Report</h4>
+                                </div>
+                                <p class="text-slate-700">We take the final, validated file from Operations and update our official records. We then generate and send out the final Daily Attendance Report to all stakeholders, which concludes the process.</p>
+                            </div>
+                        </div>
+                        `,icon:"user-check"},"VTO Process":{description:`
+                        <div class="text-left space-y-6">
+                            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="users-round" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">1. We Identify an Overstaffing Opportunity</h4>
+                                </div>
+                                <p class="text-slate-700">When our live monitoring in <strong>Amazon Connect</strong> shows that call volume is lower than forecasted and we are overstaffed, we identify an opportunity to offer Voluntary Time Off (VTO) to save on operational costs.</p>
+                            </div>
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="megaphone" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">2. We Communicate the VTO Offer</h4>
+                                </div>
+                                <p class="text-slate-700">We send a broadcast message to a targeted group of agents, offering VTO on a first-come, first-served basis. The message specifies the duration of the VTO (e.g., for the rest of the shift, or for the last 2 hours).</p>
+                            </div>
+                             <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-green-200 bg-green-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide-check-circle-2" class="w-6 h-6 text-green-700"></i>
+                                    <h4 class="font-bold text-xl text-green-800">3. We Approve and Update Systems</h4>
+                                </div>
+                                <p class="text-slate-700">Agents who are interested respond to the offer. We approve them in the order they respond until we reach our target staffing level. We then update the agent's schedule in <strong>IEX</strong> to reflect the VTO and ensure they are logged out of <strong>Amazon Connect</strong> correctly.</p>
+                            </div>
+                        </div>`,icon:"user-minus"},"Unscheduled Absence":{description:`
+                        <div class="text-left space-y-6">
+                             <div class="p-4 rounded-lg border-2 border-red-200 bg-red-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="user-round-x" class="w-6 h-6 text-red-700"></i>
+                                    <h4 class="font-bold text-xl text-red-800">1. Agent Notifies Team Lead</h4>
+                                </div>
+                                <p class="text-slate-700">When an employee is unable to work due to illness, they must inform their Team Lead before the start of their shift, following the program's call-in procedure.</p>
+                            </div>
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="file-text" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">2. Team Lead Validates & Requests Approval</h4>
+                                </div>
+                                <p class="text-slate-700">The Team Lead seeks the proper documentation (e.g., medical certificate) and, using their discretion, sends a formal approval request to the Operation Manager.</p>
+                            </div>
+                             <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="gavel" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">3. Operation Manager Approves or Denies</h4>
+                                </div>
+                                <p class="text-slate-700">The Operation Manager reviews the request and makes the final decision based on the documentation and company policy.</p>
+                            </div>
+                             <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-green-200 bg-green-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide-edit" class="w-6 h-6 text-green-700"></i>
+                                    <h4 class="font-bold text-xl text-green-800">4. Team Lead Updates Systems</h4>
+                                </div>
+                                <p class="text-slate-700">Based on the OM's decision, the Team Lead informs the agent and updates the official attendance tracker to reflect the absence as either excused or unexcused.</p>
+                            </div>
+                        </div>`,icon:"user-round-x"},"Outage Process":{description:`
+                         <div class="text-left space-y-6">
+                            <div class="p-4 rounded-lg border-2 border-red-200 bg-red-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="alert-triangle" class="w-6 h-6 text-red-700"></i>
+                                    <h4 class="font-bold text-xl text-red-800">1. We Identify and Verify the Outage</h4>
+                                </div>
+                                <p class="text-slate-700">As soon as we receive reports of a system issue, particularly with <strong>Amazon Connect</strong> or <strong>Salesforce</strong>, our team works with IT and Operations to immediately verify the scope and business impact.</p>
+                            </div>
+                            <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="radio-tower" class="w-6 h-6 text-amber-700"></i>
+                                    <h4 class="font-bold text-xl text-amber-800">2. We Establish a Communication Bridge</h4>
+                                </div>
+                                <p class="text-slate-700">We immediately open a communication channel (like a priority group chat or conference bridge) to provide real-time updates to all stakeholders, from agents to senior leadership.</p>
+                            </div>
+                             <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-slate-300 bg-slate-100">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide="user-cog" class="w-6 h-6 text-slate-700"></i>
+                                    <h4 class="font-bold text-xl text-slate-800">3. We Manage Agent Status</h4>
+                                </div>
+                                <p class="text-slate-700">We instruct all impacted agents to log out of <strong>Amazon Connect</strong> and go into a specific "System Outage" Aux code. This ensures they do not receive contacts and that their time is coded correctly for reporting.</p>
+                            </div>
+                             <div class="flex justify-center"><i data-lucide="arrow-down" class="w-8 h-8 text-slate-400"></i></div>
+                             <div class="p-4 rounded-lg border-2 border-green-200 bg-green-50">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i data-lucide-file-check" class="w-6 h-6 text-green-700"></i>
+                                    <h4 class="font-bold text-xl text-green-800">4. We Oversee Recovery and Reporting</h4>
+                                </div>
+                                <p class="text-slate-700">Once the system is stable, we coordinate a phased login to prevent overloading the system. After the event, we compile a detailed outage report outlining the timeline, impact, and productivity loss.</p>
+                            </div>
+                        </div>`,icon:"server-crash"},"RTA Violation":{description:`
+                         <div class="text-left">
+                            <p class="mb-4">An RTA Violation is any unapproved deviation from the agent's plotted schedule in <strong>IEX</strong>. We identify these by comparing the schedule to the agent's actual status in <strong>Amazon Connect</strong>.</p>
+                            <h4 class="font-bold text-lg text-slate-800 mb-2">Common Examples of Violations:</h4>
+                             <ul class="space-y-2 list-disc list-inside text-slate-600 mb-6">
+                                <li>Being in the wrong Aux code (e.g., in "Meeting" when scheduled for calls).</li>
+                                <li>Taking extended breaks or lunches beyond the scheduled time.</li>
+                                <li>Late start of shift or returning late from breaks.</li>
+                                <li>Unscheduled offline time without getting approval from the RTA.</li>
+                            </ul>
+                            <div class="p-4 rounded-lg bg-amber-50 border border-amber-200">
+                                <h4 class="font-bold text-lg text-amber-800">Our Process:</h4>
+                                <p class="text-slate-600 mt-1">We flag these violations in our daily reports. Team Leads are responsible for discussing these with their agents during coaching sessions to correct the behavior. Consistent violations can impact an agent's performance scorecard.</p>
+                            </div>
+                        </div>`,icon:"shield-alert"}}};
+            const processListContainer=document.getElementById("process-list"),processContentContainer=document.getElementById("process-content");const renderProcesses=()=>{let e={Scheduling:"calendar-clock","Real Time Management":"history"},t="";for(const o in processData){t+=`<div class="flex items-center gap-3 p-4 bg-slate-100 border-b border-slate-200"><i data-lucide="${e[o]}" class="w-5 h-5 text-amber-600"></i><h3 class="text-lg font-bold text-slate-800">${o}</h3></div>`;for(const i in processData[o])t+=`<div class="process-item cursor-pointer p-4 border-b border-slate-200 text-slate-600 font-medium" data-category="${o}" data-item="${i}">${i}</div>`}processListContainer.innerHTML=t};const renderContent=(e,t)=>{const{description:o,icon:i}=processData[e][t];processContentContainer.innerHTML=`<div class="w-full"><div class="flex flex-col items-center text-center mb-6"><div class="w-16 h-16 rounded-full bg-amber-100 mx-auto mb-4 flex items-center justify-center"><i data-lucide="${i}" class="w-8 h-8 text-amber-500"></i></div><h3 class="text-2xl font-bold text-slate-900">${t}</h3></div><div class="text-slate-600">${o}</div></div>`,lucide.createIcons()};processListContainer.addEventListener("click",e=>{if(e.target.classList.contains("process-item")){processListContainer.querySelectorAll(".process-item").forEach(e=>{e.classList.remove("active-process")}),e.target.classList.add("active-process"),renderContent(e.target.dataset.category,e.target.dataset.item)}});
+            const dailyFlowContainer=document.getElementById("daily-flow-container"),dailyFlowModal=document.getElementById("daily-flow-modal"),modalContent=dailyFlowModal.querySelector("div"),modalHeader=document.getElementById("modal-header"),modalTitle=document.getElementById("modal-title"),modalBody=document.getElementById("modal-body"),closeModalBtn=document.getElementById("close-modal-btn"),dailyFlowData={monday:{title:"Monday",color:"bg-red-500",task:"Leading the headcount reconciliation for all programs",details:{description:"The primary focus for Monday is to ensure headcount accuracy for the week.",points:["Cross-check the official roster against operational reports.","Identify and resolve any discrepancies immediately.","Ensure accurate staffing records for weekly planning."]}},tuesday:{title:"Tuesday",color:"bg-amber-400",task:"Plotting of PTOs for the following week & Updating of Capacity Files",details:{description:"Proactive planning of Paid Time Off (PTO) and capacity is essential for maintaining service levels.",points:["Approve and schedule employee leave requests for the upcoming week.","Update capacity files with all approved leaves and absences.","Guarantee program coverage is never compromised."]}},wednesday:{title:"Wednesday",color:"bg-red-500",task:"Creating schedules, plotting LOAs, and internal capacity review with Operations.",details:{description:"This day is dedicated to building and adjusting the master schedule for the following week.",points:["Generate employee schedules based on forecast models.","Incorporate approved Leaves of Absence (LOAs).","Host internal capacity review with Operations to identify gaps."]}},thursday:{title:"Thursday",color:"bg-amber-400",task:"Publishing finalized schedules & presenting plans to client partners.",details:{description:"Finalizing and communicating the upcoming week's schedule and presenting the plan to clients.",points:["Provide employees with their finalized schedules in a timely manner.","Upload the final schedule to the WFM portal.","Present the finalized staffing and schedule plans to client partners.","<strong class='font-semibold text-amber-800'>Key Deadline:</strong> PTO & Schedule Change Validation at 10:00 PM MNL."]}},friday:{title:"Friday",color:"bg-red-500",task:"Generating initial schedules for the succeeding week.",details:{description:"Focus on proactive planning for the week after next to stay ahead of schedule.",points:["Analyze initial forecasts for the upcoming weeks.","Generate preliminary schedules for the following week (Week+2).","<strong class='font-semibold text-red-800'>Key Deadline:</strong> Weekly Schedules Published & Locked at 2:00 AM MNL (Thu Shift)."]}}};const renderDailyFlow=()=>{dailyFlowContainer.innerHTML=Object.entries(dailyFlowData).map(([e,t])=>`
+                    <div id="${e}" class="daily-flow-card flex flex-col cursor-pointer border-r border-slate-200 last:border-r-0">
+                        <div class="p-6 h-48 flex items-center justify-center"><div class="w-24 h-24 rounded-full border-4 flex justify-center items-center ${t.color.replace("bg-","border-")}"><i data-lucide="users" class="w-12 h-12 ${t.color.replace("bg-","text-")}"></i></div></div>
+                        <div class="${t.color} w-full p-3 text-center text-white font-bold text-lg">${t.title}</div>
+                        <div class="p-6 text-center text-slate-600 flex-grow flex items-center justify-center">${t.task}</div>
+                    </div>`).join("")};const openModal=e=>{const t=dailyFlowData[e];modalTitle.textContent=`${t.title}: Key Activities`,modalBody.innerHTML=`<p class="mb-4">${t.details.description}</p><ul class="space-y-2 list-disc list-inside">${t.details.points.map(e=>`<li>${e}</li>`).join("")}</ul>`,modalHeader.className=`p-5 flex items-center justify-between border-b-4 ${t.color}`,dailyFlowModal.classList.remove("hidden"),dailyFlowModal.classList.add("flex"),setTimeout(()=>{modalContent.classList.remove("scale-95","opacity-0"),modalContent.classList.add("scale-100","opacity-100")},10),lucide.createIcons()},closeModal=()=>{modalContent.classList.add("scale-95","opacity-0"),setTimeout(()=>{dailyFlowModal.classList.add("hidden"),dailyFlowModal.classList.remove("flex")},300)};dailyFlowContainer.addEventListener("click",e=>{const t=e.target.closest(".daily-flow-card");t&&openModal(t.id)}),closeModalBtn.addEventListener("click",closeModal),dailyFlowModal.addEventListener("click",e=>{e.target===dailyFlowModal&&closeModal()}),document.addEventListener("keydown",e=>{"Escape"===e.key&&!dailyFlowModal.classList.contains("hidden")&&closeModal()});
+            renderProcesses(),renderDailyFlow(),lucide.createIcons(),processListContainer.querySelector(".process-item").click();
+            const sections=document.querySelectorAll("section[id]"),navLinks=document.querySelectorAll("#sidebar-nav a");const observer=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){const t=e.target.getAttribute("id");navLinks.forEach(e=>{e.classList.remove("active-nav-link"),e.getAttribute("href")===`#${t}`&&e.classList.add("active-nav-link")})}})},{root:null,rootMargin:"0px",threshold:.4});sections.forEach(e=>{observer.observe(e)});
         });
     </script>
 </body>
