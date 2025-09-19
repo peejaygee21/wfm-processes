@@ -172,7 +172,7 @@
                 <section id="tools" class="mb-20">
                     <h2 class="text-3xl font-bold text-center text-slate-900 mb-10">Tools & Resources</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <a href="https://lookerstudio.google.com/u/0/reporting/74072e24-9709-4137-f48-d5e54f99128d/page/16nUF" target="_blank" class="group bg-white p-6 rounded-lg shadow-lg border border-slate-200 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                        <a href="https://lookerstudio.google.com/s/vMhjo8TjDPk" target="_blank" class="group bg-white p-6 rounded-lg shadow-lg border border-slate-200 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                            <div class="w-16 h-16 rounded-full bg-sky-100 mb-4 flex items-center justify-center transition-all duration-300 group-hover:bg-sky-500 group-hover:scale-110"><i data-lucide="layout-dashboard" class="w-8 h-8 text-sky-600 transition-all duration-300 group-hover:text-white"></i></div>
                            <h3 class="text-lg font-bold text-slate-800">Lifesafer Dashboard</h3>
                         </a>
@@ -815,10 +815,26 @@
                         <div class="p-6 text-center text-slate-600 flex-grow flex items-center justify-center">${t.task}</div>
                     </div>`).join("")};const openModal=e=>{const t=dailyFlowData[e];modalTitle.textContent=`${t.title}: Key Activities`,modalBody.innerHTML=`<p class="mb-4">${t.details.description}</p><ul class="space-y-2 list-disc list-inside">${t.details.points.map(e=>`<li>${e}</li>`).join("")}</ul>`,modalHeader.className=`p-5 flex items-center justify-between border-b-4 ${t.color}`,dailyFlowModal.classList.remove("hidden"),dailyFlowModal.classList.add("flex"),setTimeout(()=>{modalContent.classList.remove("scale-95","opacity-0"),modalContent.classList.add("scale-100","opacity-100")},10),lucide.createIcons()},closeModal=()=>{modalContent.classList.add("scale-95","opacity-0"),setTimeout(()=>{dailyFlowModal.classList.add("hidden"),dailyFlowModal.classList.remove("flex")},300)};dailyFlowContainer.addEventListener("click",e=>{const t=e.target.closest(".daily-flow-card");t&&openModal(t.id)}),closeModalBtn.addEventListener("click",closeModal),dailyFlowModal.addEventListener("click",e=>{e.target===dailyFlowModal&&closeModal()}),document.addEventListener("keydown",e=>{"Escape"===e.key&&!dailyFlowModal.classList.contains("hidden")&&closeModal()});
             renderProcesses(),renderDailyFlow(),lucide.createIcons(),processListContainer.querySelector(".process-item").click();
-            const sections=document.querySelectorAll("section[id]"),navLinks=document.querySelectorAll("#sidebar-nav a");const observer=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){const t=e.target.getAttribute("id");navLinks.forEach(e=>{e.classList.remove("active-nav-link"),e.getAttribute("href")===`#${t}`&&e.classList.add("active-nav-link")})}})},{root:null,rootMargin:"0px",threshold:.4});sections.forEach(e=>{observer.observe(e)});
+            const sections=document.querySelectorAll("section[id]"),navLinks=document.querySelectorAll("#sidebar-nav a");
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav-link');
+                        });
+                        const activeLink = document.querySelector(`#sidebar-nav a[href="#${id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active-nav-link');
+                        }
+                    }
+                });
+            }, { 
+                rootMargin: "-50% 0px -50% 0px"
+            });
+            sections.forEach(e=>{observer.observe(e)});
         });
     </script>
 </body>
 </html>
-" and I have asked you to use this information for Capacity Planning under Core Processes in the Canvas.
 
